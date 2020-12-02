@@ -92,9 +92,20 @@ class PaintingDB
         return $statement->fetchAll();
     }
 
-    public function getAllForPainting($paintingID)
+    public function getAllForPainting($galleryID)
     {
         $sql = self::$baseSQL . " WHERE GalleryID=?";
+        $statement = DatabaseHelper::runQuery(
+            $this->pdo,
+            $sql,
+            array($galleryID)
+        );
+        return $statement->fetchAll();
+    }
+
+    public function getDetailPainting($paintingID)
+    {
+        $sql = 'SELECT GalleryID, Title, YearOfWork, FirstName, LastName, ImageFileName, Medium, Description, Width, Height, CopyrightText, WikiLink, MuseumLink, JsonAnnotations FROM Paintings INNER JOIN Artists ON Paintings.ArtistID = Artists.ArtistID WHERE PaintingID=?';
         $statement = DatabaseHelper::runQuery(
             $this->pdo,
             $sql,

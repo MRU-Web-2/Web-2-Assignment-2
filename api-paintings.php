@@ -15,6 +15,8 @@ try {
     $gateway = new PaintingDB($conn);
     if (isCorrectQueryStringInfo("gallery")) {
         $paintings = $gateway->getAllForPainting($_GET["gallery"]);
+    } else if (isCorrectQueryStringInfo("painting")) {
+        $paintings = $gateway->getDetailPainting($_GET["painting"]);
     } else {
         $paintings = $gateway->getAll();
     }
