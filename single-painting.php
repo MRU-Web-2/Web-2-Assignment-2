@@ -9,7 +9,18 @@ if (isset($_GET['painting'])) {
     $paintingURL = 'http://localhost/COMP%203512/Web-2-Assignment-2/api-paintings.php?painting=' . $paintingID;
     $paintingData = json_decode(file_get_contents($paintingURL));
     $color = json_decode($paintingData[0]->JsonAnnotations);
+    $file = generateFile($paintingData[0]->ImageFileName);
 } else {
+}
+
+function generateFile($file)
+{
+    if (strlen((string)$file) == 4) {
+        return "00" . (string)$file;
+    } else if (strlen((string)$file) == 5) {
+        return "0" . (string)$file;
+    }
+    return (string)$file;
 }
 
 function displayColors($color)
@@ -21,7 +32,7 @@ function displayColors($color)
     }
 }
 
-function addToFavorites($isLogin, $favoriteList)
+function addToFavorites($isLogin)
 {
     if ($isLogin) {
         $favorited = false;
@@ -104,14 +115,14 @@ function addToFavorites($isLogin, $favoriteList)
             </header>
         </div>
         <div>
-            <img src='painting.php?file=00<?= $paintingData[0]->ImageFileName ?>&size=square'>
+            <img src='painting.php?file=<?= $paintingData[0]->ImageFileName ?>&size=square'>
             <P>Painting Title: <?= $paintingData[0]->Title ?></P>
             <P>Artist Name: <?= $paintingData[0]->FirstName . " " . $paintingData[0]->LastName ?></P>
             <P>Gallery Name: </P>
             <P>Year: <?= $paintingData[0]->YearOfWork ?></P>
             <div>
                 <?php
-                addToFavorites($isLogin, $_SESSION['favorite']);
+                addToFavorites($isLogin);
                 ?>
             </div>
             <!-- Tab links -->
