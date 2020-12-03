@@ -1,10 +1,15 @@
 <?php
 session_start();
+$_SESSION['favorite'] = [5];
+$_SESSION['loginStatus'] = true;
+$isLogin = $_SESSION['loginStatus'];
+
 if (isset($_GET['painting'])) {
     $paintingID = $_GET['painting'];
     $paintingURL = 'http://localhost/COMP%203512/Web-2-Assignment-2/api-paintings.php?painting=' . $paintingID;
     $paintingData = json_decode(file_get_contents($paintingURL));
     $color = json_decode($paintingData[0]->JsonAnnotations);
+} else {
 }
 
 function displayColors($color)
@@ -12,7 +17,26 @@ function displayColors($color)
     foreach ($color->dominantColors as $value) {
         $hex = $value->web;
         $name = $value->name;
-        echo "<span style='background-color:$hex'>$name: $hex</span>";
+        echo "<div class='color' style='background-color:$hex'><span>$name: $hex</span></div>";
+    }
+}
+
+function addToFavorites($isLogin, $favoriteList)
+{
+    if ($isLogin) {
+        $favorited = false;
+        foreach ($_SESSION['favorite'] as $value) {
+            if ($value == $_GET['painting']) {
+                $favorited = true;
+            }
+        }
+        if (!$favorited) {
+            $id = $_GET['painting'];
+            echo "<form action='add-to-favorites.php' method='get'>";
+            echo "<input name='id' value='$id' type='hidden'>";
+            echo "<button type='submit' >Add to Favorites</button>";
+            echo "</form>";
+        }
     }
 }
 ?>
@@ -22,10 +46,16 @@ function displayColors($color)
     <meta charset="utf-8" />
     <title>Painting Details Page</title>
     <style>
-        span {
+        .color {
             display: inline-block;
             width: 100px;
             height: 100px;
+
+        }
+
+        .color span {
+            color: white;
+
         }
 
         /* Style the tab */
@@ -79,7 +109,11 @@ function displayColors($color)
             <P>Artist Name: <?= $paintingData[0]->FirstName . " " . $paintingData[0]->LastName ?></P>
             <P>Gallery Name: </P>
             <P>Year: <?= $paintingData[0]->YearOfWork ?></P>
-
+            <div>
+                <?php
+                addToFavorites($isLogin, $_SESSION['favorite']);
+                ?>
+            </div>
             <!-- Tab links -->
             <div class="tab">
                 <button class="tablinks" onclick="openMenu(event, 'Description')">Description</button>
@@ -129,7 +163,6 @@ function displayColors($color)
                     evt.currentTarget.className += " active";
                 }
             </script>
-
         </div>
     </main>
 </body>
