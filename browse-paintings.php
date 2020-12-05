@@ -49,6 +49,9 @@ require_once 'header.php';
     
     <section class="grid-box" id="paintings">
         <h2>Paintings</h2>
+
+        
+
     </section>
 
 
