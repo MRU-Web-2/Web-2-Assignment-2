@@ -4,8 +4,8 @@ main {
     padding: 10px;
 }
 .grid-box{
-    border: #cccccc solid 10px;
+    border: #eeeeee solid 10px;
     margin: 10px;
     padding: 20px;
-    background-color: #aaaaaa;
+    background-color: #cccccc;
 }
