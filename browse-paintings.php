@@ -22,7 +22,33 @@ require_once 'header.php';
 
     <section class="grid-box" id="paintingFilter">
         <h2>Painting Filter</h2>
+        <form>
+            <label></label>
+            <select name="title">
+            </select>
+            <label></label>
+            <select name="title">
+            </select>
+            <label></label>
+            <select name="title">
+            </select>
+            <label></label>
+            <select name="title">
+            </select>
+            <label></label>
+            <select name="title">
+            </select>
+            <label></label>
+            <select name="title">
+            </select>
+
+            <input type="submit" value="Filter">
+            <input type="clear" value="Clear">
+        </form>
+
     </section>
+
+    
     <section class="grid-box" id="paintings">
         <h2>Paintings</h2>
     </section>
