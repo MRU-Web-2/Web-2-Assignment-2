@@ -24,7 +24,7 @@ require_once 'header.php';
         <h2>Painting Filter</h2>
         <form>
             <label>Title</label>
-            <select name="title">
+            <input name="title">
             </select></br>
             <label>Artist</label>
             <select name="title">
@@ -41,7 +41,7 @@ require_once 'header.php';
             <label for="between">Between</label></br>
 
             <input type="submit" value="Filter">
-            <input type="clear" value="Clear">
+            <input type="submit" value="Clear">
         </form>
 
     </section>
