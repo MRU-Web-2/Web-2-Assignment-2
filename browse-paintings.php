@@ -16,7 +16,7 @@ require_once 'header.php';
 </head>
 <body>
     <?= createHeader(); ?>
-<main>
+<main class="grid">
 
 
 
@@ -48,9 +48,20 @@ require_once 'header.php';
 
     
     <section class="grid-box" id="paintings">
-        <h2>Paintings</h2>
+      <h2>Paintings</h2>
+
+      <table>
+
+        <th></th> <!-- This col is where the paintings will go -->
+        <th>Artist</th>
+        <th>Title</th>
+        <th>Year</th>
+        <th></th> <!-- This col is where the Add Favorite buttons go -->
+        <th></th> <!-- This col is where the View buttons go -->
 
         
+
+      </table>
 
     </section>
 
