@@ -1,6 +1,6 @@
 main {
     display: grid;
-    grid-template-columns: 1f 5fr;
+    grid-template-columns: 2fr 5fr;
     border: black solid 1px;
     padding: 10px;
 }
