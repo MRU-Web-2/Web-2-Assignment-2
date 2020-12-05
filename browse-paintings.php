@@ -27,19 +27,24 @@ require_once 'header.php';
             <input name="title">
             </select></br>
             <label>Artist</label>
-            <select name="title">
+            <select name="artist">
             </select></br>
             <label>Gallery</label>
-            <select name="title">
+            <select name="gallery">
             </select></br>
 
             <h4>Year</h4>
             <input type="Radio" id="before" name="year" value="before">
-            <label for="before">Before</label></br>
+            <label for="before">Before</label>
+            <input name="before-text"></br>
+
             <input type="Radio" id="after" name="year" value="after">
-            <label for="after">After</label></br>
+            <label for="after">After</label>
+            <input name="after-text"></br>
+
             <input type="Radio" id="between" name="year" value="between">
-            <label for="between">Between</label></br>
+            <label for="between">Between</label>
+            <input name="between-text"></br>
 
             <input type="submit" value="Filter">
             <input type="submit" value="Clear">
