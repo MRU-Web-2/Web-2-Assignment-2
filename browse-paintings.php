@@ -23,24 +23,22 @@ require_once 'header.php';
     <section class="grid-box" id="paintingFilter">
         <h2>Painting Filter</h2>
         <form>
-            <label></label>
+            <label>Title</label>
             <select name="title">
-            </select>
-            <label></label>
+            </select></br>
+            <label>Artist</label>
             <select name="title">
-            </select>
-            <label></label>
+            </select></br>
+            <label>Gallery</label>
             <select name="title">
-            </select>
-            <label></label>
-            <select name="title">
-            </select>
-            <label></label>
-            <select name="title">
-            </select>
-            <label></label>
-            <select name="title">
-            </select>
+            </select></br>
+
+            <input type="Radio" id="before" name="year" value="before">
+            <label for="before">Before</label></br>
+            <input type="Radio" id="after" name="year" value="after">
+            <label for="after">After</label></br>
+            <input type="Radio" id="between" name="year" value="between">
+            <label for="between">Between</label></br>
 
             <input type="submit" value="Filter">
             <input type="clear" value="Clear">
