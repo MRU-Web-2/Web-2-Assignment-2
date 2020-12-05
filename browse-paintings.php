@@ -12,6 +12,7 @@ require_once 'header.php';
     <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <link href="browse.css" rel='stylesheet'>
 </head>
 <body>
     <?= createHeader(); ?>

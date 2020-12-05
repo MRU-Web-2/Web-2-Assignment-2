@@ -1,0 +1,5 @@
+main {
+    display: grid;
+    grid-template-columns: 1f 5fr;
+    border: 10px;
+}
