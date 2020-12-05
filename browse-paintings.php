@@ -14,13 +14,17 @@ require_once 'header.php';
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
 </head>
 <body>
-<?= createHeader(); ?>
+    <?= createHeader(); ?>
 <main>
 
 
 
-    <section></section>
-    <section></section>
+    <section id="paintingFilter">
+        <h2>Painting Filter</h2>
+    </section>
+    <section id="paintings">
+        <h2>Paintings</h2>
+    </section>
 
 
 
