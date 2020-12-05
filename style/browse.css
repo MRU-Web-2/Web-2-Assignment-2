@@ -1,11 +1,11 @@
 main {
     display: grid;
     grid-template-columns: 2fr 5fr;
-    border: black solid 1px;
     padding: 10px;
 }
 .grid-box{
-    border: blue solid 1px;
-    margin: 5px;
-    padding: 5px
+    border: #cccccc solid 10px;
+    margin: 10px;
+    padding: 20px;
+    background-color: #aaaaaa;
 }
