@@ -33,6 +33,7 @@ require_once 'header.php';
             <select name="title">
             </select></br>
 
+            <h4>Year</h4>
             <input type="Radio" id="before" name="year" value="before">
             <label for="before">Before</label></br>
             <input type="Radio" id="after" name="year" value="after">
