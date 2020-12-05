@@ -20,10 +20,10 @@ require_once 'header.php';
 
 
 
-    <section id="paintingFilter">
+    <section class="grid-box" id="paintingFilter">
         <h2>Painting Filter</h2>
     </section>
-    <section id="paintings">
+    <section class="grid-box" id="paintings">
         <h2>Paintings</h2>
     </section>
 

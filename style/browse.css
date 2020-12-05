@@ -2,4 +2,9 @@ main {
     display: grid;
     grid-template-columns: 1f 5fr;
     border: black solid 1px;
+    padding: 10px;
+}
+.grid-box{
+    border: blue solid 1px;
+    margin: 5px;
 }
