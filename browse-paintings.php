@@ -22,10 +22,10 @@
 // }
 
 ?>
-
+<?php include("header.php");?>
 <main class="grid">
 
-    <?php include("header.php");?>
+    
 
 
     <section class="grid-box" id="paintingFilter">
@@ -94,7 +94,4 @@
 
 
 </main>
-<footer class="ui black inverted segment">
-  <div class="ui container">This is the footer</div>
-</footer>
 </body>

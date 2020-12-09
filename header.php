@@ -11,7 +11,7 @@
 
     <ul class="main-nav" id="js-menu">
         <li>
-            <a href="#" class="nav-links">Home</a>
+            <a href="index.php" class="nav-links">Home</a>
         </li>
         <li>
             <a href="#" class="nav-links">Galleries</a>
@@ -25,15 +25,15 @@
         <?php
             $var = 1;
             # If a user is loged in, then use the 'Logout' keyphrase
-            if ($var == 1) {
+            if ($var == 0) {
                 echo "
                 <li>
-                    <a href='#' class='nav-links'>Logout</a>
+                    <a href='index.php' class='nav-links'>Logout</a>
                 </li>";
             } else {
                 echo "
                 <li>
-                    <a href='#' class='nav-links'>Login</a>
+                    <a href='login.php' class='nav-links'>Login</a>
                 </li>";
             }
         ?>
