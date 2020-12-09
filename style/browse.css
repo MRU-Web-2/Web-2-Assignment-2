@@ -130,3 +130,21 @@ h2{
         color: rgba(255, 255, 255, 1);
     }
 }
+.table-img{
+    width: 50px;
+    border: #cccccc solid 5px;
+}
+.table{
+    width: 100%;
+}
+.atf-button{
+
+}
+.atf-button:hover, .view-button:hover{
+    color:lightskyblue;
+    cursor: pointer;
+}
+
+.view-button{
+
+}

@@ -55,16 +55,25 @@
     <section class="grid-box" id="paintings">
       <h2>Paintings</h2>
 
-      <table>
+      <table class="table">
 
-        <th></th> <!-- This col is where the paintings will go -->
-        <th>Artist</th>
-        <th>Title</th>
-        <th>Year</th>
-        <th></th> <!-- This col is where the Add Favorite buttons go -->
-        <th></th> <!-- This col is where the View buttons go -->
+        <tr>
+          <th></th> <!-- This col is where the paintings will go -->
+          <th>Artist</th>
+          <th>Title</th>
+          <th>Year</th>
+          <th></th> <!-- This col is where the Add Favorite buttons go -->
+          <th></th> <!-- This col is where the View buttons go -->
+        </tr>
 
-        
+        <tr>
+          <th><img src="./images/paintings/square/001050.jpg" class="table-img"/></th> <!--Photo-->
+          <th>Pedro Janikan</th> <!--Artist-->
+          <th>Self Portrait; Senhor homem bonito.</th> <!--Title-->
+          <th>2021</th><!--Year-->
+          <th><a class="atf-button">Add To Favourites</a></th>
+          <th><a class="view-button">View</a></th>
+        </tr>      
 
       </table>
 
