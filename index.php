@@ -106,11 +106,11 @@ h1 {
 
 </style>
 </head>
-<body ><center>
+<body><center>
     <h1>Assignment 2</h1><br><br><br>
     <a href="#" id="a" type="button" name="register" value="register" on>Log In</a>
     <a href="#" id="b" type="button" name="register" value="register">Join</a><br><br><br><br>
-    <div class="Searchbar">;
+    <div class="Searchbar">
     <form action="browse.php" method="get" style="width: 800px; height: 150px">
 
 
