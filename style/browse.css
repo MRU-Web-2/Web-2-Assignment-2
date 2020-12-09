@@ -19,6 +19,8 @@ body {
     background-color: #cccccc;
 }
 
+/* ~ Painting Filter Styling ~ */
+
 .filter-input{
     position: relative;
     width: 55%;
@@ -49,9 +51,12 @@ h2{
     left: 12px;
 }
 .filter-button{
-    position: relative;
-    
+    position: relative;   
 }
+
+
+/* ~ Display Paintings Style ~ */
+
 .table-img{
     width: 50px;
     border: #cccccc solid 5px;
