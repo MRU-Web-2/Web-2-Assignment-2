@@ -2,7 +2,7 @@
 
 <head>
 <title>
- Home_Page 
+Assignment 2 - Home Page
 </title>
 <style>
 
@@ -71,7 +71,7 @@ border-right:15px solid white;
 </style>
 </head>
 <body>
-  <header><h1>Header</h1></header>
+<?php include("header.php");?>
 <center>
 <div class="row">
   <div id="c" class="column1">	
