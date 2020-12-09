@@ -1,0 +1,24 @@
+runtime: php55
+api_version: 1
+
+env_variables:
+  MYSQL_USER: "root"
+  MYSQL_PASSWORD: "root"
+  MYSQL_DSN: mysql:dbname=art;unix_socket=/cloudsql/assignment2-297900:us-central1:assignment2
+beta_settings:
+  cloud_sql_instances: "assignment2-297900:us-central1:assignment2"
+
+handlers:
+  # Serve images as static resources
+  - url: /(.+\.(gif|png|jpg))$
+    static_files: \1
+    upload: .+\.(gif|png|jpg)$
+  # Serve images as static resources
+  - url: /(.+\.(htm|html))$
+    static_files: \1
+    upload: .+\.(htm|html)$
+  # Serve php scripts
+  - url: /(.+\.php)$
+    script: \1
+  - url: /.*
+    script: index.php
