@@ -1,53 +1,52 @@
-<?php
-require_once 'header.php';
 
-
-?>
 
 <!DOCTYPE html>
 <html lang=en>
 <head>
     <title>Lab 14</title>
     <meta charset=utf-8>
+    <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
     <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <!-- This reference is for the hamburger icon, taken from: fontawesome.com-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="./style/browse.css" rel='stylesheet'>
 </head>
 <body>
-    <?= createHeader(); ?>
 <main class="grid">
 
+    <?php include("header.php");?>
 
 
     <section class="grid-box" id="paintingFilter">
         <h2>Painting Filter</h2>
         <form>
-            <label>Title</label>
-            <input name="title">
+            <label class="filter-label">Title</label>
+            <input class="filter-input" id="title">
             </select></br>
-            <label>Artist</label>
-            <select name="artist">
+            <label class="filter-label">Artist</label>
+            <select class="filter-input" id="artist">
             </select></br>
-            <label>Gallery</label>
-            <select name="gallery">
+            <label class="filter-label">Gallery</label>
+            <select class="filter-input" id="gallery">
             </select></br>
 
             <h4>Year</h4>
             <input type="Radio" id="before" name="year" value="before">
-            <label for="before">Before</label>
-            <input name="before-text"></br>
+            <label for="before" class="filter-label">Before</label>
+            <input class="filter-input" id="before-text"></br>
 
             <input type="Radio" id="after" name="year" value="after">
-            <label for="after">After</label>
-            <input name="after-text"></br>
+            <label for="after" class="filter-label">After</label>
+            <input class="filter-input" id="after-text"></br>
 
             <input type="Radio" id="between" name="year" value="between">
-            <label for="between">Between</label>
-            <input name="between-text"></br>
+            <label for="between" class="filter-label">Between</label>
+            <input class="filter-input" id="between-text"></br>
 
-            <input type="submit" value="Filter">
-            <input type="submit" value="Clear">
+            <input type="submit" value="Filter" class="filter-button" id="filter">
+            <input type="submit" value="Clear" class="filter-button" id="clear">
         </form>
 
     </section>
