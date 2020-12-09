@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <title>Paintings</title>
+    <title>Assignment 2 - Paintings</title>
     <meta charset=utf-8>
     <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
     <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
@@ -42,10 +42,10 @@ if (isset($_GET['painting'])) {
 }
 
 ?>
-
+<?php include("header.php");?>
 <main class="grid">
 
-    <?php include("header.php");?>
+    
 
 
     <section class="grid-box" id="paintingFilter">
@@ -116,7 +116,4 @@ if (isset($_GET['painting'])) {
 
 
 </main>
-<footer class="ui black inverted segment">
-  <div class="ui container">This is the footer</div>
-</footer>
 </body>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <title>Assignment 2 - About</title>
+    <title>Assignment 2 - Login Page</title>
     <meta charset=utf-8>
     <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
     <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
@@ -11,7 +11,9 @@
 <body>
 <main>
     <?php include("header.php");?>
-    <div>
-    </div>  
+    <section>
+        <div calss="container">
+        </div>
+    </section>
 </main>
 </body>
