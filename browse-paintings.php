@@ -15,38 +15,26 @@
 
 <?php 
 // Adding the database connection to recieve saved rows 
-// try{
-//   $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
-// } catch (Exception $e) {
-//   die( $e->getMessage() );
-// }
-if (isset($_GET['painting'])) {
-  $paintingID = $_GET['painting'];
-  $paintingURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?painting=' . $paintingID;
-  $paintingData = json_decode(file_get_contents($paintingURL));
-  $color = json_decode($paintingData[0]->JsonAnnotations);
-  $file = generateFile($paintingData[0]->GalleryID);
+function getGalleries(){
+    $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
+    $galleriesData = json_decode(file_get_contents($galleriesURL));
 
-  echo "<option value='1'>Gallery</option>";
+    foreach($galleriesData as $gallery)
+    echo "<option value='$gallery->GalleryName'>$gallery->GalleryName</option>";
+}
 
-} else {
+function getArtists(){
+  $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
+  $galleriesData = json_decode(file_get_contents($galleriesURL));
+
+  foreach($galleriesData as $gallery)
+  echo "<option value='$gallery->GalleryName'>$gallery->GalleryName</option>";
 }
-//   if (isset($_GET['painting'])) {
-//     $paintingID = $_GET['painting'];
-//     $paintingURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?painting=' . $paintingID;
-//     $galleryData = json_decode(file_get_contents($paintingURL));
-//     $color = json_decode($galleryData[0]->JsonAnnotations);
-//     $file = generateFile($galleryData[0]->ImageFileName);
-// } else {
-// }
-}
+
 
 ?>
 <?php include("header.php");?>
 <main class="grid">
-
-    
-
 
     <section class="grid-box" id="paintingFilter">
         <h2>Painting Filter</h2>
@@ -57,13 +45,16 @@ if (isset($_GET['painting'])) {
             <label class="filter-label">Artist</label>
             <select class="filter-input" id="artist">
               <option value='0'>Select Artist</option>
-              <?php 
-                getGalleries();
+              <?php
+                getArtists();
               ?>
             </select></br>
             <label class="filter-label">Gallery</label>
             <select class="filter-input" id="gallery">
               <option value="0">Select Gallery</option>
+              <?php 
+                getGalleries();
+              ?>
             </select></br>
 
             <h4>Year</h4>
