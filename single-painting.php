@@ -6,7 +6,7 @@ $isLogin = $_SESSION['loginStatus'];
 
 if (isset($_GET['painting'])) {
     $paintingID = $_GET['painting'];
-    $paintingURL = 'http://localhost/COMP%203512/Web-2-Assignment-2/api-paintings.php?painting=' . $paintingID;
+    $paintingURL = 'http://localhost/COMP%203512/Web-2-Assignment-2/api-paintings.php?painting' . $paintingID;
     $paintingData = json_decode(file_get_contents($paintingURL));
     $color = json_decode($paintingData[0]->JsonAnnotations);
     $file = generateFile($paintingData[0]->ImageFileName);

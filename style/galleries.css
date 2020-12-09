@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+.grid {
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    padding: 10px;
+}
+.grid-box{
+    min-width: 240px;
+    border: #eeeeee solid 10px;
+    margin: 10px;
+    padding: 20px;
+    background-color: #cccccc;
+}
+
+/* ~ Painting Filter Styling ~ */
+
+.filter-input{
+    position: relative;
+    width: 55%;
+    height: 30px;
+}
+.filter-label{
+    font-weight: bold;
+}
+h2{
+    margin-left: 10%;
+}
+#title{
+    left: 58px;
+}
+#artist{
+    left: 50px;
+}
+#gallery{
+    left: 39px;
+}
+#before-text{
+    left: 25px;
+}
+#after-text{
+    left: 37px;
+}
+#between-text{
+    left: 12px;
+}
+.filter-button{
+    position: relative;   
+}
+
+
+/* ~ Display Paintings Style ~ */
+
+.left{
+    text-align: left;
+}
+
+.table-img{
+    width: 50px;
+    border: #cccccc solid 5px;
+}
+.table{
+    width: 100%;
+}
+
+
+.view-button{
+
+}
