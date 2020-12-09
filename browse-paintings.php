@@ -20,6 +20,26 @@
 // } catch (Exception $e) {
 //   die( $e->getMessage() );
 // }
+if (isset($_GET['painting'])) {
+  $paintingID = $_GET['painting'];
+  $paintingURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?painting=' . $paintingID;
+  $paintingData = json_decode(file_get_contents($paintingURL));
+  $color = json_decode($paintingData[0]->JsonAnnotations);
+  $file = generateFile($paintingData[0]->GalleryID);
+
+  echo "<option value='1'>Gallery</option>";
+
+} else {
+}
+//   if (isset($_GET['painting'])) {
+//     $paintingID = $_GET['painting'];
+//     $paintingURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?painting=' . $paintingID;
+//     $galleryData = json_decode(file_get_contents($paintingURL));
+//     $color = json_decode($galleryData[0]->JsonAnnotations);
+//     $file = generateFile($galleryData[0]->ImageFileName);
+// } else {
+// }
+}
 
 ?>
 
@@ -37,7 +57,9 @@
             <label class="filter-label">Artist</label>
             <select class="filter-input" id="artist">
               <option value='0'>Select Artist</option>
-              
+              <?php 
+                getGalleries();
+              ?>
             </select></br>
             <label class="filter-label">Gallery</label>
             <select class="filter-input" id="gallery">
