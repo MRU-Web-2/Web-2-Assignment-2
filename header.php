@@ -7,7 +7,7 @@
         <i style="font-size:34px" class="fa">&#xf0c9;</i>
     </span>
 
-    <a href="#" class="logo">Logo</a>
+    <a href="index.php" class="logo">Logo</a>
 
     <ul class="main-nav" id="js-menu">
         <li>

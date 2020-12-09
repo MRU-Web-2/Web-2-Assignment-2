@@ -39,7 +39,7 @@ if (isset($_GET['painting'])) {
 //     $file = generateFile($galleryData[0]->ImageFileName);
 // } else {
 // }
-}
+//}
 
 ?>
 <?php include("header.php");?>
