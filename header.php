@@ -48,6 +48,9 @@ navBarToggle.addEventListener('click', function () {
 </script>
 
 <style>
+* {
+    font-family: 'Josefin Sans', sans-serif;
+}
 /* Navbar taken from:
     https://itnext.io/how-to-build-a-responsive-navbar-using-flexbox-and-javascript-eb0af24f19bf */
     .navbar{
