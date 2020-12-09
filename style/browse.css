@@ -61,13 +61,27 @@ h2{
     text-align: left;
 }
 
-.table-img{
-    width: 50px;
-    border: #cccccc solid 5px;
-}
 .table{
     width: 100%;
 }
+
+td{
+    padding-left: 5px;   
+}
+
+.table-img{
+    width: 50px;
+
+}
+
+tr:nth-child(odd){
+    background: #CCC;
+}
+
+tr:nth-child(even){
+    background: #DDD;
+}
+
 .atf-button{
 
 }
