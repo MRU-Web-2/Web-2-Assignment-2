@@ -1,9 +1,7 @@
-
-
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <title>Lab 14</title>
+    <title>Assignment 2 - Paintings</title>
     <meta charset=utf-8>
     <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
     <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
@@ -14,9 +12,40 @@
     <link href="./style/browse.css" rel='stylesheet'>
 </head>
 <body>
+
+<?php 
+// Adding the database connection to recieve saved rows 
+// try{
+//   $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
+// } catch (Exception $e) {
+//   die( $e->getMessage() );
+// }
+if (isset($_GET['painting'])) {
+  $paintingID = $_GET['painting'];
+  $paintingURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?painting=' . $paintingID;
+  $paintingData = json_decode(file_get_contents($paintingURL));
+  $color = json_decode($paintingData[0]->JsonAnnotations);
+  $file = generateFile($paintingData[0]->GalleryID);
+
+  echo "<option value='1'>Gallery</option>";
+
+} else {
+}
+//   if (isset($_GET['painting'])) {
+//     $paintingID = $_GET['painting'];
+//     $paintingURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?painting=' . $paintingID;
+//     $galleryData = json_decode(file_get_contents($paintingURL));
+//     $color = json_decode($galleryData[0]->JsonAnnotations);
+//     $file = generateFile($galleryData[0]->ImageFileName);
+// } else {
+// }
+}
+
+?>
+<?php include("header.php");?>
 <main class="grid">
 
-    <?php include("header.php");?>
+    
 
 
     <section class="grid-box" id="paintingFilter">
@@ -27,9 +56,14 @@
             </select></br>
             <label class="filter-label">Artist</label>
             <select class="filter-input" id="artist">
+              <option value='0'>Select Artist</option>
+              <?php 
+                getGalleries();
+              ?>
             </select></br>
             <label class="filter-label">Gallery</label>
             <select class="filter-input" id="gallery">
+              <option value="0">Select Gallery</option>
             </select></br>
 
             <h4>Year</h4>
@@ -67,12 +101,12 @@
         </tr>
 
         <tr class="left">
-          <th><img src="./images/paintings/square/001050.jpg" class="table-img"/></th> <!--Photo-->
-          <th>Pedro Janikan</th> <!--Artist-->
-          <th>Self Portrait; Senhor homem bonito.</th> <!--Title-->
-          <th>2021</th><!--Year-->
-          <th><a class="atf-button">Add To Favourites</a></th>
-          <th><a class="view-button">View</a></th>
+          <td><img src="./images/paintings/square/001050.jpg" class="table-img"/></td> <!--Photo-->
+          <td>Pedro Janikan</td> <!--Artist-->
+          <td>Self Portrait; Senhor homem bonito.</td> <!--Title-->
+          <td>2021</td><!--Year-->
+          <td><a class="atf-button">Add To Favourites</a></td>
+          <td><a class="view-button">View</a></td>
         </tr>      
 
       </table>
@@ -82,7 +116,4 @@
 
 
 </main>
-<footer class="ui black inverted segment">
-  <div class="ui container">This is the footer</div>
-</footer>
 </body>

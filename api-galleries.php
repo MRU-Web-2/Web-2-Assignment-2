@@ -1,6 +1,6 @@
 <?php
-require_once 'config.inc.php';
-require_once 'assignment2-db-classes.inc.php';
+require_once('includes/stock-config.inc.php');
+require_once('lib/assignment2-db-classes.inc.php');
 
 // Tell the browser to expect JSON rather than HTML
 header('Content-type: application/json');
@@ -8,10 +8,7 @@ header('Content-type: application/json');
 header("Access-Control-Allow-Origin: *");
 
 try {
-    $conn = DatabaseHelper::createConnection(array(
-        DBCONNSTRING,
-        DBUSER, DBPASS
-    ));
+    $conn = DatabaseHelper::createConnection(array(DBCONNECTION, DBUSER, DBPASS));
     $gateway = new GalleryDB($conn);
     if (isCorrectQueryStringInfo("gallery")) {
         $galleries = $gateway->getAllForGallery($_GET["gallery"]);
