@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang=en>
 <head>
@@ -14,6 +12,17 @@
     <link href="./style/browse.css" rel='stylesheet'>
 </head>
 <body>
+
+<?php 
+// Adding the database connection to recieve saved rows 
+// try{
+//   $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
+// } catch (Exception $e) {
+//   die( $e->getMessage() );
+// }
+
+?>
+
 <main class="grid">
 
     <?php include("header.php");?>
@@ -27,6 +36,7 @@
             </select></br>
             <label class="filter-label">Artist</label>
             <select class="filter-input" id="artist">
+              <option value='0'>Select Artist</option>
             </select></br>
             <label class="filter-label">Gallery</label>
             <select class="filter-input" id="gallery">
