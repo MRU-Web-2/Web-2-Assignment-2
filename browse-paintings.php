@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang=en>
 <head>
-    <title>Lab 14</title>
+    <title>Paintings</title>
     <meta charset=utf-8>
     <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
     <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
@@ -37,9 +37,11 @@
             <label class="filter-label">Artist</label>
             <select class="filter-input" id="artist">
               <option value='0'>Select Artist</option>
+              
             </select></br>
             <label class="filter-label">Gallery</label>
             <select class="filter-input" id="gallery">
+              <option value="0">Select Gallery</option>
             </select></br>
 
             <h4>Year</h4>
