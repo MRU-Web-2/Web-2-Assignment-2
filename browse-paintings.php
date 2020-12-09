@@ -57,7 +57,7 @@
 
       <table class="table">
 
-        <tr>
+        <tr class="left">
           <th></th> <!-- This col is where the paintings will go -->
           <th>Artist</th>
           <th>Title</th>
@@ -66,7 +66,7 @@
           <th></th> <!-- This col is where the View buttons go -->
         </tr>
 
-        <tr>
+        <tr class="left">
           <th><img src="./images/paintings/square/001050.jpg" class="table-img"/></th> <!--Photo-->
           <th>Pedro Janikan</th> <!--Artist-->
           <th>Self Portrait; Senhor homem bonito.</th> <!--Title-->
