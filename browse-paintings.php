@@ -71,7 +71,7 @@
           <th>Pedro Janikan</th> <!--Artist-->
           <th>Self Portrait; Senhor homem bonito.</th> <!--Title-->
           <th>2021</th><!--Year-->
-          <th><a class="atf-button">Add To Favourites</a></th>
+          <th><a class="atf-button" href="add-to-favorites.php?id=7">Add To Favourites</a></th>
           <th><a class="view-button">View</a></th>
         </tr>      
 
