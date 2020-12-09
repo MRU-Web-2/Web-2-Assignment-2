@@ -67,12 +67,12 @@
         </tr>
 
         <tr class="left">
-          <th><img src="./images/paintings/square/001050.jpg" class="table-img"/></th> <!--Photo-->
-          <th>Pedro Janikan</th> <!--Artist-->
-          <th>Self Portrait; Senhor homem bonito.</th> <!--Title-->
-          <th>2021</th><!--Year-->
-          <th><a class="atf-button">Add To Favourites</a></th>
-          <th><a class="view-button">View</a></th>
+          <td><img src="./images/paintings/square/001050.jpg" class="table-img"/></td> <!--Photo-->
+          <td>Pedro Janikan</td> <!--Artist-->
+          <td>Self Portrait; Senhor homem bonito.</td> <!--Title-->
+          <td>2021</td><!--Year-->
+          <td><a class="atf-button">Add To Favourites</a></td>
+          <td><a class="view-button">View</a></td>
         </tr>      
 
       </table>
