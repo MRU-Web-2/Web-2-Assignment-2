@@ -6,7 +6,7 @@ $isLogin = $_SESSION['loginStatus'];
 
 if (isset($_GET['painting'])) {
     $paintingID = $_GET['painting'];
-    $paintingURL = 'http://localhost/COMP%203512/Web-2-Assignment-2/api-paintings.php?painting=' . $paintingID;
+    $paintingURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?painting=' . $paintingID;
     $paintingData = json_decode(file_get_contents($paintingURL));
     $color = json_decode($paintingData[0]->JsonAnnotations);
     $file = generateFile($paintingData[0]->ImageFileName);
@@ -111,10 +111,11 @@ function addToFavorites($isLogin)
     <main>
         <div>
             <header>
-                <p>Header</p>
+                <?php include("header.php");?>
             </header>
         </div>
         <div>
+            
             <img src='painting.php?file=<?= $paintingData[0]->ImageFileName ?>&size=square'>
             <P>Painting Title: <?= $paintingData[0]->Title ?></P>
             <P>Artist Name: <?= $paintingData[0]->FirstName . " " . $paintingData[0]->LastName ?></P>
