@@ -24,11 +24,17 @@ function getGalleries(){
 }
 
 function getArtists(){
-  $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
-  $galleriesData = json_decode(file_get_contents($galleriesURL));
+  $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
+  $paintingsData = json_decode(file_get_contents($paintingsURL));
+  $artists = array();
+  foreach($paintingsData as $painting)
+    $found = false;
+    foreach($artists as $artist){
+      if($painting->Artist){
 
-  foreach($galleriesData as $gallery)
-  echo "<option value='$gallery->GalleryName'>$gallery->GalleryName</option>";
+      }
+    }
+    echo "<option value='$gallery->Artist'>$gallery->GalleryName</option>";
 }
 
 
