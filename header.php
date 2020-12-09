@@ -20,7 +20,7 @@
             <a href="browse-paintings.php" class="nav-links">Browse</a>
         </li>
         <li>
-            <a href="browse-paintings.php" class="nav-links">About</a>
+            <a href="about.php" class="nav-links">About</a>
         </li>
         <?php
             $var = 1;
