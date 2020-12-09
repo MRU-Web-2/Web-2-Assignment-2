@@ -57,6 +57,10 @@ h2{
 
 /* ~ Display Paintings Style ~ */
 
+.left{
+    text-align: left;
+}
+
 .table-img{
     width: 50px;
     border: #cccccc solid 5px;
