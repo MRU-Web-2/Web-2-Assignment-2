@@ -7,7 +7,7 @@
         <i style="font-size:34px" class="fa">&#xf0c9;</i>
     </span>
 
-    <a href="#" class="logo">Logo</a>
+    <a href="index.php" class="logo">Logo</a>
 
     <ul class="main-nav" id="js-menu">
         <li>
@@ -48,6 +48,9 @@ navBarToggle.addEventListener('click', function () {
 </script>
 
 <style>
+* {
+    font-family: 'Josefin Sans', sans-serif;
+}
 /* Navbar taken from:
     https://itnext.io/how-to-build-a-responsive-navbar-using-flexbox-and-javascript-eb0af24f19bf */
     .navbar{
