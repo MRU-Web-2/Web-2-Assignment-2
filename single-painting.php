@@ -139,7 +139,9 @@ function displayTabs($data, $colors)
     </script>
 </head>
 
-<body>
+<body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
+background-size: cover;
+background-repeat: no-repeat;">
     <main>
         <header>
             <?php include("header.php"); ?>
