@@ -13,7 +13,7 @@ try {
     $artists = $gateway->getAll();
 
 
-    echo json_encode($galleries, JSON_NUMERIC_CHECK);
+    echo json_encode($artists, JSON_NUMERIC_CHECK);
 } catch (Exception $e) {
     die($e->getMessage());
 }
