@@ -1,50 +1,35 @@
 <?php
 /* add your PHP code here */
-require_once('config.inc.php');
-require_once('api-galleries');
 
-try {
-    $pdo = new PDO(DBCONNSTRING, DBUSER, DBPASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-    $galleries = getGalleries($pdo);
-    if (isset($_GET['gallery'])) {
-        $paintings = getPaintings($pdo, $_GET['gallery']);
-    }
-    $pdo = null;
-} catch (PDOException $e) {
-    die($e->getMessage());
-}
-
-function getGalleries($pdo)
+//https://www.codegrepper.com/code-examples/php/php+sort+json+array
+function getGalleries()
 {
-    $sql = "SELECT GalleryID, GalleryName FROM Galleries
-   ORDER BY GalleryName";
-    $result = $pdo->query($sql);
-    return $result->fetchAll(PDO::FETCH_ASSOC);
-}
+    $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
+    $galleriesData = json_decode(file_get_contents($galleriesURL));
 
-function getPaintings($pdo, $id)
-{
-    $sql = "SELECT PaintingID, Title, YearOfWork, ImageFileName
- FROM Paintings WHERE GalleryID=?";
-    $statement = $pdo->prepare($sql);
-    $statement->bindValue(1, $id);
-    $statement->execute();
-    return $statement->fetchAll(PDO::FETCH_ASSOC);
-}
+    usort($galleriesData, 'sortByName');
 
-function outputGalleries($galleries)
-{
-    foreach ($galleries as $row) {
+    foreach ($galleriesData as $row) {
         echo "<li>";
-        echo "<a href='" . $_SERVER['PHP_SELF'] . "?gallery=" . $row['GalleryID'] . "'>";
-        echo $row['GalleryName'];
+        echo "<a href='" . $_SERVER['PHP_SELF'] . "?gallery=" . $row->GalleryID . "'>";
+        echo $row->GalleryName;
         echo "</a></li>";
     }
 }
-function outputPaintings($paintings)
+
+function sortByName($a, $b)
 {
+    return  $a->GalleryName > $b->GalleryName;
+}
+
+function sortByArtist($a, $b) { 
+    return a$->ArtistLastName 
+}
+
+function getPaintings()
+{
+    $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
+    $paintingsData = json_decode(file_get_contents($paintingsURL));
     echo "<h3 class='is-size-5 has-text-weight-medium'>Paintings</h3>";
     echo "<table class='table'>";
     echo "<tr>";
@@ -52,15 +37,27 @@ function outputPaintings($paintings)
     echo "<th>Title</th>";
     echo "<th>Year</th>";
     echo "</tr>";
-    foreach ($paintings as $row) {
-        echo "<tr>";
-        $filename = "./images/paintings/square/" . $row['ImageFileName'] . '.jpg';
-        echo "<td>" . "<img src='" . $filename . "' class='table-img'></td>";
-        echo "<td>" . $row['Title'] . "</td>";
-        echo "<td>" . $row['YearOfWork'] . "</td>";
-        echo "</tr>";
+    foreach ($paintingsData as $row) {
+        if ($row->GalleryID == $_GET['gallery']) {
+            echo "<tr>";
+            $filename = generateFile($row->ImageFileName) . ".jpg";
+            echo "<td>" . "<img src='./images/paintings/square/" . $filename . "' class='table-img'></td>";
+            echo "<td>" . $row->Title . "</td>";
+            echo "<td>" . $row->YearOfWork . "</td>";
+            echo "</tr>";
+        }
     }
     echo "</table>";
+}
+
+function generateFile($file)
+{
+    if (strlen((string)$file) == 4) {
+        return "00" . (string)$file;
+    } else if (strlen((string)$file) == 5) {
+        return "0" . (string)$file;
+    }
+    return (string)$file;
 }
 
 ?>
@@ -80,22 +77,19 @@ function outputPaintings($paintings)
 </head>
 
 <body>
+    <?php include("header.php"); ?>
     <main class="grid">
-
-        <?php include("header.php"); ?>
         <section class="grid-box" id="paintingFilter">
             <h2>Painting Filter</h2>
             <?php
-            outputGalleries($galleries);
+            getGalleries();
             ?>
         </section>
 
-        <section class="grid-box" id <section class="grid-box" id="paintings">
+        <section class="grid-box" id="paintings">
             <h2>Paintings</h2>
             <?php
-            if (isset($paintings) && count($paintings) > 0) {
-                outputPaintings($paintings);
-            }
+            getPaintings();
             ?>
         </section>
     </main>
