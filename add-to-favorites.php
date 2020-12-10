@@ -1,9 +1,24 @@
 <?php
-session_set_cookie_params(0);
-session_start();
-$list = $_SESSION['favorite'];
-array_push($list, $_GET['id']);
-$_SESSION['favorite'] = $list;
+include_once('includes/stock-config.inc.php');
+include_once('lib/assignment2-db-classes.inc.php');
+
+// session_set_cookie_params(0);
+// session_start();
+// $list = $_SESSION['favorite'];
+// array_push($list, $_GET['id']);
+// $_SESSION['favorite'] = $list;
+header("Access-Control-Allow-Origin: *");
+
+try {
+    echo "TEST";
+    $conn = DatabaseHelper::createConnection(array(DBCONNECTION, DBUSER, DBPASS));
+    $gateway = new CustomerDB($conn);
+
+    $customer = $gateway->getAll();
+} catch (Exception $e) {
+    die($e->getMessage());
+}
+
 ?>
 <html>
 
@@ -21,5 +36,4 @@ $_SESSION['favorite'] = $list;
         </form>
     </main>
 </body>
-
 </html>

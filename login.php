@@ -86,6 +86,18 @@ function isLoginDataPresent() {
 </head>
 <body>
     <?php include("header.php");?>
+    <!-- <link href="./style/style.css" rel='stylesheet'> -->
+   <style>
+       body{
+background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+margin: 50px auto;
+    text-align: center;
+    width: 100%;
+}
+</style>
+    
     <section class="containter">
         <div class="formData">
             <h2>Login</h2>
@@ -93,6 +105,7 @@ function isLoginDataPresent() {
             <form method="post" action="login.php">
                 <label for="email">Email</label>
                 <input type="email" name="email">
+                
                 <label for="pass">Password</label>
                 <input type="password" name="pass">
                 <input type="submit" value="Login">
