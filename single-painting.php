@@ -15,24 +15,13 @@ if (isset($_GET['painting'])) {
     $color = json_decode($paintingData[0]->JsonAnnotations);
 } else {
 }
-
-function addToFavorites($isLogin)
+function addToFavorites()
 {
-    if ($isLogin) {
-        $favorited = false;
-        foreach ($_SESSION['favorite'] as $value) {
-            if ($value == $_GET['painting']) {
-                $favorited = true;
-            }
-        }
-        if (!$favorited) {
-            $id = $_GET['painting'];
-            echo "<form action='add-to-favourites.php' method='get'>";
-            echo "<input name='id' value='$id' type='hidden'>";
-            echo "<button type='submit' >Add to Favorites</button>";
-            echo "</form>";
-        }
-    }
+    echo "<td><a href='add-to-favourites.php?painting=" . $_GET['painting'] . "'>Add to Favourites</a></td>";
+}
+function removeFromFavorites()
+{
+    echo "<td><a href='remove-from-favourites.php?painting=" . $_GET['painting'] . "'>Remove From Favourites</a></td>";
 }
 
 function displayTabs($data, $colors)
@@ -116,6 +105,11 @@ function displayTabs($data, $colors)
             border: 1px solid #ccc;
             border-top: none;
         }
+        .main{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            padding: 10px;   
+        }
     </style>
     <script>
         function openMenu(evt, tabs) {
@@ -146,26 +140,33 @@ background-repeat: no-repeat;">
         <header>
             <?php include("header.php"); ?>
         </header>
-        <div>
-            <img src='painting.php?file=<?= $paintingData[0]->ImageFileName ?>&size=square' style='width:400px;height:400px'>
-            <P>Painting Title: <?= $paintingData[0]->Title ?></P>
-            <P>Artist Name: <?= $paintingData[0]->FirstName . " " . $paintingData[0]->LastName ?></P>
-            <P>Gallery Name: <?= $paintingData[0]->GalleryName ?></P>
-            <P>Year: <?= $paintingData[0]->YearOfWork ?></P>
-            <?php
-            addToFavorites($isLogin);
-            ?>
-
-            <!-- Tab links -->
-            <div class="tab">
-                <button class="tablinks" onclick="openMenu(event, 'Description')">Description</button>
-                <button class="tablinks" onclick="openMenu(event, 'Details')">Details</button>
-                <button class="tablinks" onclick="openMenu(event, 'Colors')">Colors</button>
+        <div class="main">
+            <div>
+                <img src='painting.php?file=<?= $paintingData[0]->ImageFileName ?>&size=square' style='width:400px;height:400px'>
+                <P>Painting Title: <?= $paintingData[0]->Title ?></P>
+                <P>Artist Name: <?= $paintingData[0]->FirstName . " " . $paintingData[0]->LastName ?></P>
+                <P>Gallery Name: <?= $paintingData[0]->GalleryName ?></P>
+                <P>Year: <?= $paintingData[0]->YearOfWork ?></P>
+                <?php
+                if ( isset($_SESSION['favs']) && in_array($_GET['painting'], $_SESSION['favs'])) {
+                    removeFromFavorites();
+                } else {
+                    addToFavorites();
+                }
+                ?>
             </div>
-            <!-- Tab content -->
-            <?php
-            displayTabs($paintingData[0], $color);
-            ?>
+            <div>
+                <!-- Tab links -->
+                <div class="tab">
+                    <button class="tablinks" onclick="openMenu(event, 'Description')">Description</button>
+                    <button class="tablinks" onclick="openMenu(event, 'Details')">Details</button>
+                    <button class="tablinks" onclick="openMenu(event, 'Colors')">Colors</button>
+                </div>
+                <!-- Tab content -->
+                <?php
+                displayTabs($paintingData[0], $color);
+                ?>
+            </div>
         </div>
     </main>
 </body>

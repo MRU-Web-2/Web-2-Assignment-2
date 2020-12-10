@@ -24,6 +24,7 @@ function printSinglePainting($paintingID, $paintingsData) {
     echo "<img src='painting.php?file=" . $painting->ImageFileName . "&size=square' style='width:200px;height:200px' alt='" . $painting->Title . "'>";
     echo "</a>";
     echo "<p>" . $painting->Title . "</p></div>";
+    echo "<td><a href='remove-from-favourites.php?painting=" . $paintingID . "'>Remove from Favourites</a></td>";
 }
 
 // If there are no favourites yet, run this code
