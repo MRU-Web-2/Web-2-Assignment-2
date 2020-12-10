@@ -132,7 +132,7 @@ class ArtistDB
         return $statement->fetchAll();
     }
 
-    public function getAllForArtist($aristID)
+    public function getAllForArtist($artistID)
     {
         $sql = self::$baseSQL . " WHERE ArtistID=?";
         $statement = DatabaseHelper::runQuery(
