@@ -118,29 +118,7 @@ h1 {
     <form action="browse-paintings.php" method="get" style="width: 800px; height: 150px">
 
 
-        <!-- <select class="ui fluid dropdown" name="museum">
-            <option value='0'>Select Museum</option>  
-            <?php  
-            //    /* add your PHP code here */
-            //    try {
-            //     $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
-            //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //     $sql = "select * from Galleries order by GalleryName";
-            //     $result = $pdo->query($sql);
-            //     $data = $result -> fetchAll(PDO::FETCH_ASSOC);
-              
-                
-            //   foreach($data as $row){
-            //     echo "<option value=" . $row['GalleryID'] .">" . $row['GalleryName'] . "</option>"; 
-            //   }
-              
-            //   }
-              
-            //   catch (PDOException $e) {
-            //     die( $e->getMessage() );
-            //    }
 
-            ?> -->
         </select>
     <input type="search" name="title"  />
     </form>

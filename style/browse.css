@@ -5,6 +5,10 @@
 }
 body {
     font-family: 'Josefin Sans', sans-serif;
+    background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+        
 }
 .grid {
     display: grid;
