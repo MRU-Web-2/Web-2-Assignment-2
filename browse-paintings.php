@@ -5,13 +5,13 @@ function getSingleArtist($row){
   echo "<option value='" . $row['ArtistID'] . "'>" . $row['LastName'] . "</option>";
 }
 
+// Doesn't work for some reason....
+// try{
+//   $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
 
-try{
-  $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
-
-} catch (Exception $e) {
-  die( $e->getMessage() );
-}
+// } catch (Exception $e) {
+//   die( $e->getMessage() );
+// }
 
 function getGalleries(){
   $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
