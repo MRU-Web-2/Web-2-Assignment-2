@@ -5,13 +5,12 @@ function getSingleArtist($row){
   echo "<option value='" . $row['ArtistID'] . "'>" . $row['LastName'] . "</option>";
 }
 
+// try{
+//   $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
 
-try{
-  $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
-
-} catch (Exception $e) {
-  die( $e->getMessage() );
-}
+// } catch (Exception $e) {
+//   die( $e->getMessage() );
+// }
 
 function getGalleries(){
   $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
@@ -31,11 +30,46 @@ function getArtists(){
 
 function generateRows(){
   // if any of the filters are set, then display the filters
+ if( isset($_GET['title']) || isset($_GET['artist']) || isset($_GET['gallery']) || isset($_GET['before-text']) || isset($_GET['after-text']) || isset($_GET['between-text']) ){
+    echo "<script>console.log('');</script>";
 
-
+ }
   //if not, display the top 20 paintings by year
+  $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
+  $paintingsData = json_decode(file_get_contents($paintingsURL));
+  usort($paintingsData, "cmp");
 
+  for($i=0; $i<20; $i++){
+    getSinglePainting($paintingsData[$i]);
+  }
 }
+
+function cmp($a, $b) {
+  return strcmp($a->YearOfWork, $b->YearOfWork);
+}
+
+function getSinglePainting($painting){
+  echo "<tr class='left'>";
+  echo "<td><img src='./images/paintings/square/$painting->ImageFileName.jpg' title='$painting->ImageFileName' class='table-img'/></td>";
+  echo "<td>".getArtistNameWhereIDis($painting->ArtistID)."</td>";
+  echo "<td>$painting->Title</td>";
+  echo "<td>$painting->YearOfWork</td>";
+  echo "<td><a class='atf-button'>Add To Favourites</a></td>";
+  echo "<td><a class='view-button'>View</a></td>";
+  echo "</tr>";
+}
+
+function getArtistNameWhereIDis($ArtID){
+  $artistURL = 'https://assignment2-297900.uc.r.appspot.com/api-artists.php';
+  $artistData = json_decode(file_get_contents($artistURL));
+
+  foreach($artistData as $artist){
+    if($artist->ArtistID === $ArtID){
+      return ("".$artist->FirstName." ".$artist->LastName);
+    }
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -120,9 +154,6 @@ function generateRows(){
           <th></th> <!-- This col is where the View buttons go -->
         </tr>
 
-        <?php 
-          generateRows();
-        ?>
         <tr class="left">
           <td><img src="./images/paintings/square/001050.jpg" class="table-img" /></td>
           <!--Photo-->
@@ -136,6 +167,9 @@ function generateRows(){
           <td><a class="view-button">View</a></td>
         </tr>
 
+        <?php 
+          generateRows();
+        ?>
       </table>
 
     </section>
