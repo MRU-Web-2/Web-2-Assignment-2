@@ -1,3 +1,15 @@
+<?php
+
+
+session_start();
+// if user id not in session then redirect back to login screen
+if ( ! isset($SESSION['user'])) {
+  header('Location: login.php');
+  exit();
+}
+
+?>
+
 <html>
 
 <head>

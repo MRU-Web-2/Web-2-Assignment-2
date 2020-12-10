@@ -105,11 +105,69 @@ class PaintingDB
 
     public function getDetailPainting($paintingID)
     {
-        $sql = 'SELECT GalleryID, Title, YearOfWork, FirstName, LastName, ImageFileName, Medium, Description, Width, Height, CopyrightText, WikiLink, MuseumLink, JsonAnnotations FROM Paintings INNER JOIN Artists ON Paintings.ArtistID = Artists.ArtistID WHERE PaintingID=?';
+        $sql = 'SELECT GalleryName, Title, YearOfWork, FirstName, LastName, ImageFileName, Medium, Description, Width, Height, CopyrightText, WikiLink, MuseumLink, JsonAnnotations FROM ((Paintings INNER JOIN Artists ON Paintings.ArtistID = Artists.ArtistID) INNER JOIN Galleries ON Paintings.GalleryID = Galleries.GalleryID) WHERE PaintingID=?';
         $statement = DatabaseHelper::runQuery(
             $this->pdo,
             $sql,
             array($paintingID)
+        );
+        return $statement->fetchAll();
+    }
+}
+
+class ArtistDB
+{
+    private static $baseSQL = "SELECT * FROM Artists";
+
+    public function __construct($connection)
+    {
+        $this->pdo = $connection;
+    }
+
+    public function getAll()
+    {
+        $sql = self::$baseSQL;
+        $statement =
+            DatabaseHelper::runQuery($this->pdo, $sql, null);
+        return $statement->fetchAll();
+    }
+
+    public function getAllForArtist($artistID)
+    {
+        $sql = self::$baseSQL . " WHERE ArtistID=?";
+        $statement = DatabaseHelper::runQuery(
+            $this->pdo,
+            $sql,
+            array($artistID)
+        );
+        return $statement->fetchAll();
+    }
+}
+
+class CustomerDB
+{
+    private static $baseSQL = "SELECT * FROM CustomerLogon";
+
+    public function __construct($connection)
+    {
+        $this->pdo = $connection;
+    }
+
+    public function getAll()
+    {
+        $sql = self::$baseSQL;
+        $statement =
+            DatabaseHelper::runQuery($this->pdo, $sql, null);
+        return $statement->fetchAll();
+    }
+
+    public function getAllForArtist($artistID)
+    {
+        $sql = self::$baseSQL . " WHERE ArtistID=?";
+        $statement = DatabaseHelper::runQuery(
+            $this->pdo,
+            $sql,
+            array($artistID)
         );
         return $statement->fetchAll();
     }
