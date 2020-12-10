@@ -143,3 +143,21 @@ class ArtistDB
         return $statement->fetchAll();
     }
 }
+
+class CustomerDB
+{
+    private static $baseSQL = "SELECT * FROM customrlogon";
+
+    public function __construct($connection)
+    {
+        $this->pdo = $connection;
+    }
+
+    public function getAll()
+    {
+        $sql = self::$baseSQL;
+        $statement =
+            DatabaseHelper::runQuery($this->pdo, $sql, null);
+        return $statement->fetchAll();
+    }
+}
