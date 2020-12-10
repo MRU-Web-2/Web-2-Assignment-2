@@ -161,18 +161,9 @@ function getArtistNameWhereIDis($ArtID){
   <link href="./style/browse.css" rel='stylesheet'>
 </head>
 
-<body>
-<style>
-       body{
-background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
-background-size: auto;
-background-repeat: repeat;
-/* margin: 50px auto;
-    text-align: center; */
-    width: 100%;
-}
-
-</style>
+<body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
+background-size: cover;
+background-repeat: no-repeat;">
 
   <?php include("header.php"); ?>
   <main class="grid">

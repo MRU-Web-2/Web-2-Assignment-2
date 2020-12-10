@@ -4,6 +4,8 @@
     margin: 0;
 }
 body {
+    background-size: cover;
+    background-repeat: no-repeat;
     font-family: 'Josefin Sans', sans-serif;
     background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
     background-size: cover;
