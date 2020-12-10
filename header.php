@@ -108,7 +108,7 @@ img {
 .active {
     display: block;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 900px) {
     .navbar {
         display: flex;
         justify-content: space-between;

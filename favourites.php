@@ -20,24 +20,28 @@ function printSinglePainting($paintingID, $paintingsData) {
             $painting = $p;
         }
     }
-    echo "<div><a href='single-painting.php?painting=" . $paintingID . "'>";
+    echo "<div class='paintingBox'><a href='single-painting.php?painting=" . $paintingID . "'>";
     echo "<img src='painting.php?file=" . $painting->ImageFileName . "&size=square' style='width:200px;height:200px' alt='" . $painting->Title . "'>";
     echo "</a>";
-    echo "<p>" . $painting->Title . "</p></div>";
+    echo "<p>" . $painting->Title . "</p>";
     echo "<td><a href='remove-from-favourites.php?painting=" . $paintingID . "'>Remove from Favourites</a></td>";
+    echo "</div>";
 }
 
 // If there are no favourites yet, run this code
 function noFavourites() {
-    echo "<div id='emptyFavourites'>There are no favourites here yet</div>";
+    echo "<div style='background-color: gray' id='emptyFavourites'>There are no favourites here yet</div>";
 }
 
 ?>
 <html>
 
 <head>
-    <meta charset="utf-8" />
     <title>Painting Details Page</title>
+    <meta charset="utf-8" />
+    <!-- Hamburger Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="./style/favourites.css" rel='stylesheet'>
 </head>
 
 <body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);

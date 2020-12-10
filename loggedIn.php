@@ -42,6 +42,8 @@ function noFavourites() {
 <head>
     <title>Assignment 2 - Home Page</title>
     <meta charset=utf-8>
+    <!-- Hamburger Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="./style/loggedIn.css" rel='stylesheet'>
 </head>
 <body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
