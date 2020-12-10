@@ -6,7 +6,15 @@ if ( ! isset($_SESSION['user'])) {
   header('Location: login.php');
   exit();
 }
+$customersURL = 'https://assignment2-297900.uc.r.appspot.com/api-customers.php';
+$customerData = json_decode(file_get_contents($customersURL));
 
+foreach($customerData as $cd) {
+  if ($cd->CustomerID == $_SESSION['user']) {
+    $customer = $cd;
+    break;
+  }
+}
 
 $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
 $paintingsData = json_decode(file_get_contents($paintingsURL));
@@ -34,6 +42,12 @@ function noFavourites() {
     echo "<div id='emptyFavourites'>There are no favourites here yet</div>";
 }
 
+function printUserInfo($customer) {
+  echo "<div>" . $customer->FirstName . "</div>";
+  echo "<div>" . $customer->LastName . "</div>";
+  echo "<div>" . $customer->FirstName . "</div>";
+  echo "<div>" . $customer->FirstName . "</div>";
+}
 
 ?>
 <!DOCTYPE html>
@@ -50,10 +64,35 @@ function noFavourites() {
 background-size: cover;
 background-repeat: no-repeat;">
 <?php include("header.php");?>
+<main>
+  <section class="boxStuff" id="userinfo">
+    <h2>User Info</h2>
+    <?php
+    printUserInfo($customer);
+    ?>
+  </section>
+  <section class="boxStuff" id="favourites">
+  <h2>Favourites</h2>
+  <?php
+  if ( isset($_SESSION['favs']) && ! empty($_SESSION['favs'])) {
+    printAllPaintingsAsImages($paintingsData);
+  } else {
+    noFavourites();
+  }
+  ?>
+  </section>
+  <section class="boxStuff" id="search">
+  <h2>Search</h2>
+  <form action="browse-paintings.php" method="GET">
+    <input type="search" name="title"/>
+    </form>
+  </section>
+  <section class="boxStuff" id="maylike">
+  <h2>Paintings You May Like</h2>
 
-
-
-<div class="row">
+  </section>
+</main>
+<!-- <div class="row">
   <div id="c" class="column1">	
   <div class="row1">
     <h1 >User Info</h1>
@@ -73,7 +112,7 @@ background-repeat: no-repeat;">
 	</div>
    <div class="row4"><h1>Paintings You may like</h1></div>
   </div>
-</div>
+</div> -->
 
 </body>
 </html>

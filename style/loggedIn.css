@@ -3,6 +3,13 @@ body{
     text-align: center;
     width: 100%;
 }
+.boxStuff {
+    border: #eeeeee solid 10px;
+    text-align: center;
+    margin: 10px;
+    padding: 5px 20px;
+    background-color: #cccccc;
+}
 .row {
     display: flex;
     height:700px;	
@@ -54,4 +61,30 @@ input {
     padding: 10px;
     
     
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 300px 400px;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    padding: 10px;
+    margin: 20px;
+}
+#userinfo{
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+#favourites{
+    grid-row-start: 3;
+    grid-row-end: 7;
+}
+#search{
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+#maylike{
+    grid-row-start: 2;
+    grid-row-end: 7;
 }
