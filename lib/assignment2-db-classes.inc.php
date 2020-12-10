@@ -143,3 +143,32 @@ class ArtistDB
         return $statement->fetchAll();
     }
 }
+
+class CustomerLogonDB
+{
+    private static $baseSQL = "SELECT * FROM customerlogon";
+
+    public function __construct($connection)
+    {
+        $this->pdo = $connection;
+    }
+
+    public function getAll()
+    {
+        $sql = self::$baseSQL;
+        $statement =
+            DatabaseHelper::runQuery($this->pdo, $sql, null);
+        return $statement->fetchAll();
+    }
+
+    public function getAllForArtist($aristID)
+    {
+        $sql = self::$baseSQL . " WHERE ArtistID=?";
+        $statement = DatabaseHelper::runQuery(
+            $this->pdo,
+            $sql,
+            array($artistID)
+        );
+        return $statement->fetchAll();
+    }
+}
