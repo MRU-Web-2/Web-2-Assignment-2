@@ -7,7 +7,8 @@
         <i style="font-size:34px" class="fa">&#xf0c9;</i>
     </span>
 
-    <a href="index.php" class="logo">Logo</a>
+    <a href="index.php" class="logo"><img src = "images/rhondak-native-florida-folk-artist-_Yc7OtfFn-0-unsplash.jpg" ></a>
+    
 
     <ul class="main-nav" id="js-menu">
         <li>
@@ -89,6 +90,12 @@ navBarToggle.addEventListener('click', function () {
     font-size: 22px;
     margin-top: 10px;
     margin-left: 20px;
+}
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1px;
+  width: 50px;
 }
 .navbar-toggle {
     position: absolute;
