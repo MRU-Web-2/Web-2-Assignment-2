@@ -1,4 +1,5 @@
 <?php
+session_set_cookie_params(0);
 session_start();
 $list = $_SESSION['favorite'];
 array_push($list, $_GET['id']);
@@ -14,7 +15,6 @@ $_SESSION['favorite'] = $list;
 <body>
     <main>
         <p>painting sucessfully added</p>
-
         <form action='single-painting.php' method="get">
             <input type='hidden' name='painting' value='<?= $_GET["id"] ?>'>
             <input type='submit' value='Close'>
