@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang=en>
+
 <head>
     <title>Assignment 2 - About</title>
     <meta charset=utf-8>
@@ -8,10 +9,27 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
 </head>
+
 <body>
-<main>
-    <?php include("header.php");?>
-    <div>
-    </div>  
-</main>
+    <main>
+        <?php include("header.php"); ?>
+        <div>
+            <h1>Description:</h1>
+            <p>The site allows user to search for paintings through a direct search of the painting name or various filters. <br>The site can provide the user with detailed information about each painting, Users are able to login to add <br>paintings to a favorite list. The sites can suggest paintings to the users based on the favorited paintings.</p>
+            <p>The sites allow user to search for paintings </p>
+            <p>Class Name: COMP-3512</p>
+            <p>University: Mount Royal University</p>
+            <p>Professor: Randy Connolly</p>
+            <p>Year: Fall 202</p>
+            <p>Technologies: PHP, CSS, HTML, JavaScript, Google Cloud Platform, Github</p>
+            <h1>Team Info:</h1>
+            <p>Pedor: https://github.com/PedroJanikian</p>
+            <p>Peter: https://github.com/phuan516</p>
+            <p>Mark: https://github.com/MarkleSparkle</p>
+            <p>Moon: https://github.com/MoonAzi</p>
+            <p>Zain: https://github.com/Zain4271</p>
+            <p>Project Repo: https://github.com/MRU-Web-2/Web-2-Assignment-2</p>
+            <h1>Sources:</h1>
+        </div>
+    </main>
 </body>
