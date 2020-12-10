@@ -155,8 +155,13 @@ function getSinglePainting($painting){
   echo "<td>$painting->Title</td>";
   echo "<td>$painting->YearOfWork</td>";
   //echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "' class='atf-button'>Add To Favourites</a></td>";
-  echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "'><img src='./images/star/empty-star.png'  class='atf-button'/></a></td>";
+  if ( isset($_SESSION['user']) && isset($_SESSION['favs']) && in_array($painting->PaintingID, $_SESSION['favs'])) {
+    echo "<td><a href='remove-from-favourites.php?painting=" . $painting->PaintingID . "'><img src='./images/star/star.png'  class='atf-button'/></a></td>";
+  } else {
+    echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "'><img src='./images/star/empty-star.png'  class='atf-button'/></a></td>";
+  }
   //echo "<td><a class='view-button'>View</a></td>";
+
   echo "<td><a href='single-painting.php?painting=" . $painting->PaintingID . "'><img src='./images/view/view.png'  class='view-button'/></a></td>";
   echo "</tr>";
 }
