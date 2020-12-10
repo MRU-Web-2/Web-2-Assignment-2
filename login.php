@@ -90,10 +90,10 @@ function isLoginDataPresent() {
    <style>
        body{
 background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
-background-size: cover;
+background-size: auto;
 background-repeat: no-repeat;
-margin: 50px auto;
-    text-align: center;
+ /* margin: 50px auto;  */
+    text-align: center; 
     width: 100%;
 }
 
