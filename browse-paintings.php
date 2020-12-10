@@ -29,18 +29,91 @@ function getArtists(){
 }
 
 function generateRows(){
+    //getting all the paintings
+    $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
+    $paintingsData = json_decode(file_get_contents($paintingsURL));
+    usort($paintingsData, "cmp");
+    $tablePaintings = array();
+
+    $title = $_GET['title'];
+    $artist = $_GET['artist'];
+    $gallery = $_GET['gallery'];
+    if(isset($_GET['before']))
+      $before = $_GET['before'];
+    if(isset($_GET['after']))
+      $after = $_GET['after'];
+    if(isset($_GET['between']))
+      $between = $_GET['between'];
+
   // if any of the filters are set, then display the filters
- if( isset($_GET['title']) || isset($_GET['artist']) || isset($_GET['gallery']) || isset($_GET['before-text']) || isset($_GET['after-text']) || isset($_GET['between-text']) ){
-    echo "<script>console.log('');</script>";
+  if( $title != "" || (isset($artist) && $artist != 0) || (isset($_GET['gallery']) && $_GET['gallery'] != 0) || isset($_GET['before-text']) || isset($_GET['after-text']) || isset($_GET['between-text']) ){
+    echo "<script>console.log('Filters found: Title:$title, Artist:$artist, Gallery:$gallery');</script>";
 
- }
-  //if not, display the top 20 paintings by year
-  $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
-  $paintingsData = json_decode(file_get_contents($paintingsURL));
-  usort($paintingsData, "cmp");
+    //if a title isset
+    if($title != ""){
+      foreach($paintingsData as $painting){  
+        if(strpos($painting->Title,$title) != false){//if the title form data is part of the title
+          //echo "<script>console.log('Adding PaintingID:$painting->$PaintingID');</script>";
+          array_push($tablePaintings, $painting);//add the painting to the list of paintings to be added to the talbe
+        }
+      }
+    }
 
-  for($i=0; $i<20; $i++){
-    getSinglePainting($paintingsData[$i]);
+    //if an artist isset
+    if($artist !== 0 && isset($artist)){//if there is an artist selected
+      foreach($paintingsData as $painting){
+        echo "<script>console.log('$painting->ArtistID');</script>";
+        if($artist == $painting->ArtistID){//if the ArtistIDs are the same
+          //echo "<script>console.log('Adding PaintingID:$painting->$PaintingID');</script>";
+          array_push($tablePaintings, $painting);
+        }
+      }
+    }    
+
+    //if a gallery isset
+    if($_GET['gallery'] !== 0 && isset($_GET['gallery'])){//if there is a gallery selected
+      foreach($paintingsData as $painting){
+        if($_GET['gallery'] == $painting->GalleryID){
+          array_push($tablePaintings, $painting);
+        }
+      }
+    }
+
+    //if before-text is set
+    if(isset($_GET['before-text'])){
+      foreach($paintingsData as $painting){
+        if($painting->YearOfWork < $_GET['before-text']){
+          array_push($tablePaintings, $painting);
+        }
+      }
+    }
+
+    //if after-text is set
+    if(isset($_GET['after-text'])){
+      foreach($paintingsData as $painting){
+        if($_GET['after-text'] < $painting->YearOfWork){
+          array_push($tablePaintings, $painting);
+        }
+      }
+    }    
+
+    //if between-text is set
+    if(isset($_GET['before-between']) || isset($_GET['after-between'])){
+
+    }
+
+
+    foreach($tablePaintings as $tablePainting){
+      getSinglePainting($tablePainting);
+    }
+  }
+ else{
+    //if not, display the top 20 paintings by year
+
+    echo "<script>console.log('No filters found');</script>";
+    for($i=0; $i<20; $i++){
+      getSinglePainting($paintingsData[$i]);
+    }
   }
 }
 
@@ -50,7 +123,7 @@ function cmp($a, $b) {
 
 function getSinglePainting($painting){
   echo "<tr class='left'>";
-  echo "<td><img src='./images/paintings/square/$painting->ImageFileName.jpg' title='$painting->ImageFileName' class='table-img'/></td>";
+  echo "<td><img src='https://assignment2-297900.uc.r.appspot.com/painting.php?file=$painting->ImageFileName&size=square-medium' title='$painting->ImageFileName' class='table-img'/></td>";
   echo "<td>".getArtistNameWhereIDis($painting->ArtistID)."</td>";
   echo "<td>$painting->Title</td>";
   echo "<td>$painting->YearOfWork</td>";
@@ -107,7 +180,7 @@ function getArtistNameWhereIDis($ArtID){
         </select></br>
         <label class="filter-label">Artist</label>
         <select class="filter-input" name='artist' id="artist">
-          <option value='0'>Select Artist</option>
+          <option value="0">Select Artist</option>
           <?php
           getArtists();
           ?>
@@ -153,19 +226,17 @@ function getArtistNameWhereIDis($ArtID){
           <th></th> <!-- This col is where the Add Favorite buttons go -->
           <th></th> <!-- This col is where the View buttons go -->
         </tr>
-
+        
+<!-- Portrait of Pedro
         <tr class="left">
           <td><img src="./images/paintings/square/001050.jpg" class="table-img" /></td>
-          <!--Photo-->
           <td>Pedro Janikan</td>
-          <!--Artist-->
           <td>Self Portrait; Senhor homem bonito.</td>
-          <!--Title-->
           <td>2021</td>
-          <!--Year-->
           <td><a class="atf-button">Add To Favourites</a></td>
           <td><a class="view-button">View</a></td>
         </tr>
+-->
 
         <?php 
           generateRows();
