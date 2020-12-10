@@ -1,32 +1,11 @@
 <?php 
-
-require_once('includes/stock-config.inc.php');
-require_once('lib/assignment2-db-classes.inc.php');
-
 // Adding the database connection to recieve saved rows 
 
-try {
-  $conn = DatabaseHelper::createConnection(array(DBCONNECTION, DBUSER, DBPASS));
-  $artGateway = new ArtistDB($conn);
-  $artists = $artGateway->getAll();
-  $conn = null;
-} catch (Exception $e) {
-  die($e->getMessage());
-}
-
-function getAllArtists($artists) {
-  foreach($artists as $row){
-      getSingleArtists($row);
-  }
-}
-
-function getSingleArtist($row)
-{
+function getSingleArtist($row){
   echo "<option value='" . $row['ArtistID'] . "'>" . $row['LastName'] . "</option>";
 }
 
-function getGalleries()
-{
+function getGalleries(){
   $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
   $galleriesData = json_decode(file_get_contents($galleriesURL));
 
@@ -34,34 +13,12 @@ function getGalleries()
     echo "<option value='$gallery->GalleryName'>$gallery->GalleryName</option>";
 }
 
-function getArtists()
-{
-  $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
-  $paintingsData = json_decode(file_get_contents($paintingsURL));
-  $artists = array();
-  $i = 0;
-  foreach ($paintingsData as $painting) {
-    echo "<script>console.log('Debug Objects: " . $i++ . "' );</script>";
-    $found = false;
-    foreach ($artists as $artist) {
-      if ($painting->ArtistID == $artist->id) {
-        $found = true;
-        echo "<script>console.log('Debug Objects: FOUND'" . $artist->id . " );</script>";
-      }
-    }
+function getArtists(){
+  $artistsURL = 'https://assignment2-297900.uc.r.appspot.com/api-artists.php';
+  $artistsData = json_decode(file_get_contents($artistsURL));
 
-    if ($found === false) { //if the artist is not already found in the array, add it to the array. 
-      // $newArtist = (object) array('id' => $painting->ArtistID, 'name' => $painting->ArtistName);
-      // array_push($artists, $newArtist);//adds a new element to the end of the array
-      echo "<option value='$painting->ArtistID'>$painting->LastName</option>";
-    }
-  }
-
-  // //now that the $artists array is complete, let's pump out the artists
-  // foreach($artists as $artist){
-  //   echo "<script>console.log('Debug Objects: " . $artist->id . "' );</script>";
-  //   echo "<option value='$artist->id'>$artist->name</option>";
-  // }
+  foreach ($artistsData as $artist)
+    echo "<option value='$artist->ArtistID'>$artist->FirstName $artist->LastName</option>";
 }
 
 
@@ -97,7 +54,7 @@ function getArtists()
         <select class="filter-input" id="artist">
           <option value='0'>Select Artist</option>
           <?php
-          getAllArtists($connection);
+          getArtists();
           ?>
         </select></br>
         <label class="filter-label">Gallery</label>
