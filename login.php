@@ -86,16 +86,84 @@ function isLoginDataPresent() {
 </head>
 <body>
     <?php include("header.php");?>
+    <!-- <link href="./style/style.css" rel='stylesheet'> -->
+   <style>
+       body{
+background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+ /* margin: 50px auto;  */
+    text-align: center; 
+    width: 100%;
+}
+</style>
+<style>
+body {font-family: Arial, Helvetica, sans-serif;}
+
+
+input[type=email], input[type=password] {
+  width: 300px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 70px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+}
+
+
+
+.container {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+}
+
+</style>
+</head>
+<body>
+
+    
     <section class="containter">
         <div class="formData">
-            <h2>Login</h2>
+            <h2>Login Form</h2>
             <p><?= $msg ?></p>
             <form method="post" action="login.php">
-                <label for="email">Email</label>
-                <input type="email" name="email">
-                <label for="pass">Password</label>
-                <input type="password" name="pass">
-                <input type="submit" value="Login">
+            <div class="topnav">
+                <label for="email"><b>Email</b></label>
+                
+                    
+                <input type="email" placeholder = "Enter Email" name="email">
+                
+                
+                
+                <label for="pass"><b>Password     </b></label>
+                <input type="password" placeholder= "Enter Password" name="pass"> 
+                <button type="submit" id="button" type=button value="Login">Login</button>
+                </div>
+               
             </form>
         </div>
     </section>

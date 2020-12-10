@@ -78,22 +78,15 @@ td{
 
 }
 
-tr:nth-child(odd){
-    background: #CCC;
-}
-
-tr:nth-child(even){
-    background: #DDD;
-}
-
-.atf-button{
+.atf-button, .view-button{
+    color:white;
+    border: black solid 1px;
+    border-radius: 5px;
+    padding: 5px;
+    background: #55c;
 
 }
 .atf-button:hover, .view-button:hover{
     color:lightskyblue;
     cursor: pointer;
-}
-
-.view-button{
-
 }

@@ -9,6 +9,7 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
 </head>
+<<<<<<< HEAD
 
 <body>
     <main>
@@ -32,4 +33,15 @@
             <h1>Sources:</h1>
         </div>
     </main>
+=======
+<body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
+background-size: cover;
+background-repeat: no-repeat;">
+<?php include("header.php");?>
+<main>
+    
+    <div>
+    </div>  
+</main>
+>>>>>>> ce14eb3d550a95d7e50df56ce04385d14e7cc413
 </body>
