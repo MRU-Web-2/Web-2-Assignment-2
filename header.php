@@ -15,7 +15,7 @@
             <a href="index.php" class="nav-links">Home</a>
         </li>
         <li>
-            <a href="#" class="nav-links">Galleries</a>
+            <a href="galleries-page.php" class="nav-links">Galleries</a>
         </li>
         <li>
             <a href="browse-paintings.php" class="nav-links">Browse</a>
@@ -35,7 +35,7 @@
             if ( isset($_SESSION['user']) ) {
                 echo "
                 <li>
-                    <a href='add-to-favorites.php' class='nav-links'>Favourites</a>
+                    <a href='favourites.php' class='nav-links'>Favourites</a>
                 </li>
                 <li>
                     <a href='logout.php' class='nav-links'>Logout</a>

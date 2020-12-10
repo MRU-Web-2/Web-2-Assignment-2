@@ -5,6 +5,7 @@ function getSingleArtist($row){
   echo "<option value='" . $row['ArtistID'] . "'>" . $row['LastName'] . "</option>";
 }
 
+// Doesn't work for some reason....
 // try{
 //   $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
 
@@ -127,7 +128,7 @@ function getSinglePainting($painting){
   echo "<td>".getArtistNameWhereIDis($painting->ArtistID)."</td>";
   echo "<td>$painting->Title</td>";
   echo "<td>$painting->YearOfWork</td>";
-  echo "<td><a class='atf-button'>Add To Favourites</a></td>";
+  echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "' class='atf-button'>Add To Favourites</a></td>";
   echo "<td><a class='view-button'>View</a></td>";
   echo "</tr>";
 }
@@ -161,6 +162,17 @@ function getArtistNameWhereIDis($ArtID){
 </head>
 
 <body>
+<style>
+       body{
+background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+background-size: auto;
+background-repeat: repeat;
+/* margin: 50px auto;
+    text-align: center; */
+    width: 100%;
+}
+
+</style>
 
   <?php include("header.php"); ?>
   <main class="grid">
