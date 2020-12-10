@@ -108,6 +108,11 @@ input[type=email], input[type=password] {
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  border-radius: 25px;
+}
+
+input[type=email]{
+    margin-left: 25px;
 }
 
 button {
@@ -118,10 +123,12 @@ button {
   border: none;
   cursor: pointer;
   width: 70px;
+  border-radius: 25px;
 }
 
 button:hover {
   opacity: 0.8;
+  color: black;
 }
 
 
@@ -156,11 +163,11 @@ span.psw {
                 
                     
                 <input type="email" placeholder = "Enter Email" name="email">
-                
+                <br>
                 
                 
                 <label for="pass"><b>Password     </b></label>
-                <input type="password" placeholder= "Enter Password" name="pass"> 
+                <input type="password" placeholder= "Enter Password" name="pass"> <br> 
                 <button type="submit" id="button" type=button value="Login">Login</button>
                 </div>
                
