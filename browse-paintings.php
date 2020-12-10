@@ -1,6 +1,6 @@
 <?php 
 // Adding the database connection to recieve saved rows 
-
+session_start();
 function getSingleArtist($row){
   echo "<option value='" . $row['ArtistID'] . "'>" . $row['LastName'] . "</option>";
 }
@@ -47,18 +47,25 @@ function getArtists(){
     <section class="grid-box" id="paintingFilter">
       <h2>Painting Filter</h2>
       <form>
+        
         <label class="filter-label">Title</label>
-        <input class="filter-input" id="title">
+        <?php
+          if ( isset($_SESSION['title'])) {
+            echo "<input class='filter-input' name='title' id='title' content=" . $_SESSION['title'] . ">";
+          } else {
+            echo "<input class='filter-input' name='title' id='title'>";
+          }
+        ?>
         </select></br>
         <label class="filter-label">Artist</label>
-        <select class="filter-input" id="artist">
+        <select class="filter-input" name='artist' id="artist">
           <option value='0'>Select Artist</option>
           <?php
           getArtists();
           ?>
         </select></br>
         <label class="filter-label">Gallery</label>
-        <select class="filter-input" id="gallery">
+        <select class="filter-input" name='gallery' id="gallery">
           <option value="0">Select Gallery</option>
           <?php
           getGalleries();

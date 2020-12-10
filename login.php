@@ -3,36 +3,38 @@ require_once('includes/stock-config.inc.php');
 require_once('lib/assignment2-db-classes.inc.php');
 
 session_start();
-$msg = "Demonstrates how to use form authentication";
+$msg = "Please enter your email and password";
 if ( isLoginDataPresent() ) {
-    try {
-        // 1. First see if this email is in the database
-        $connection = DatabaseHelper::createConnection($connectionDetails);
-        $gate = new CustomerLogonDB($connection);
-        $data = $gate->getByUserName($_POST['email']);
-        $connection = null;
 
-        // if $data is empty then the supplied email was not found
-        // 'Pass' comes from database
-        if ( issset($data['Pass']) ) {
-            // 2. Does this password match the digest saved in the Pass field
-            // this method will do the Bcrypt verification for us
-            if ( password_verify( $_POST['pass'], $data['Pass'] )) {
-                // 3. We have a match, login the user
-                $_SESSION['user'] = $data['CustomerID'];
-                // Redirect somewhere else
-                header('Location: loggedIn.php');
+    // Check if the email exists in the api (database)
+    $customersURL = 'https://assignment2-297900.uc.r.appspot.com/api-customers.php';
+    $customerData = json_decode(file_get_contents($customersURL));
 
-            } else {
-                $msg = "Password did not match";
+    // if the email exists in the array
+    if ( in_array( $_POST['email'], $customerData )) {
+        foreach ($customerData as $c) {
+            if ( $_POST['email'] == $c ) {
+                $customer = $c;
+                break;
             }
-        } else {
-            $msg = "Email not found";
         }
-    } catch (Exception $_ENV) {
-        die( $E->getMessage() );
+        // this method will do the Bcrypt verification for us
+        if ( password_verify( $_POST['pass'], $customer['Pass'] )) {
+            // 3. We have a match, login the user
+            $_SESSION['user'] = $data['CustomerID'];
+            // Redirect somewhere else
+            echo "Nice work!";
+            header('Location: loggedIn.php');
+
+        } else {
+            $msg = "Password did not match";
+        }
+    } else {
+        $msg = "Email not found";
     }
 }
+
+
 
 function isLoginDataPresent() {
     if ( isset($_POST['email']) && isset($_POST['pass']) ) {

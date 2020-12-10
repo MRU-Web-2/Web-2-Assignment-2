@@ -108,10 +108,10 @@ h1 {
 </head>
 <body><center>
     <h1>Assignment 2</h1><br><br><br>
-    <a href="#" id="a" type="button" name="register" value="register" on>Log In</a>
+    <a href="login.php" id="a" type="button" name="register" value="register" on>Log In</a>
     <a href="#" id="b" type="button" name="register" value="register">Join</a><br><br><br><br>
     <div class="Searchbar">
-    <form action="browse.php" method="get" style="width: 800px; height: 150px">
+    <form action="browse-paintings.php" method="get" style="width: 800px; height: 150px">
 
 
         <!-- <select class="ui fluid dropdown" name="museum">
@@ -138,7 +138,7 @@ h1 {
 
             ?> -->
         </select>
-    <input type="search" name="search"  />
+    <input type="search" name="title"  />
     </form>
    </center>
 </body>
