@@ -1,4 +1,3 @@
-
 <?php 
 
 require_once('includes/stock-config.inc.php');
@@ -16,8 +15,6 @@ try {
 }
 
 function getAllArtists($artists) {
-
-
   foreach($artists as $row){
       getSingleArtists($row);
   }
