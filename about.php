@@ -8,7 +8,12 @@
 
 <body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
 background-size: cover;
-background-repeat: no-repeat;">
+background-repeat: no-repeat;
+border: #eeeeee solid 10px;
+    text-align: center;
+    margin: 10px;
+    padding: 5px 20px;
+    background-color: #cccccc;">
     <main>
         <?php include("header.php"); ?>
         <div>
