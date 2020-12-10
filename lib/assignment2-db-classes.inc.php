@@ -146,7 +146,7 @@ class ArtistDB
 
 class CustomerDB
 {
-    private static $baseSQL = "SELECT * FROM customrlogon";
+    private static $baseSQL = "SELECT * FROM customerlogon";
 
     public function __construct($connection)
     {
@@ -161,9 +161,9 @@ class CustomerDB
         return $statement->fetchAll();
     }
 
-    public function getAllForArtist($artistID)
+    public function getAllForCustomer($artistID)
     {
-        $sql = self::$baseSQL . " WHERE ArtistID=?";
+        $sql = self::$baseSQL . " WHERE CustomerID=?";
         $statement = DatabaseHelper::runQuery(
             $this->pdo,
             $sql,
