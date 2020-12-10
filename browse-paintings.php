@@ -5,6 +5,14 @@ function getSingleArtist($row){
   echo "<option value='" . $row['ArtistID'] . "'>" . $row['LastName'] . "</option>";
 }
 
+
+try{
+  $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
+
+} catch (Exception $e) {
+  die( $e->getMessage() );
+}
+
 function getGalleries(){
   $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
   $galleriesData = json_decode(file_get_contents($galleriesURL));
@@ -21,7 +29,13 @@ function getArtists(){
     echo "<option value='$artist->ArtistID'>$artist->FirstName $artist->LastName</option>";
 }
 
+function generateRows(){
+  // if any of the filters are set, then display the filters
 
+
+  //if not, display the top 20 paintings by year
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -46,7 +60,7 @@ function getArtists(){
 
     <section class="grid-box" id="paintingFilter">
       <h2>Painting Filter</h2>
-      <form>
+      <form action="./browse-paintings.php" method="GET">
         
         <label class="filter-label">Title</label>
         <?php
@@ -106,6 +120,9 @@ function getArtists(){
           <th></th> <!-- This col is where the View buttons go -->
         </tr>
 
+        <?php 
+          generateRows();
+        ?>
         <tr class="left">
           <td><img src="./images/paintings/square/001050.jpg" class="table-img" /></td>
           <!--Photo-->
