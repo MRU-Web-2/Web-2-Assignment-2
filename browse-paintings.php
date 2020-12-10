@@ -33,8 +33,25 @@ function generateRows(){
     //getting all the paintings
     $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
     $paintingsData = json_decode(file_get_contents($paintingsURL));
-    usort($paintingsData, "cmp");
+    usort($paintingsData, "cmpByYear");
     $tablePaintings = array();
+
+    if(isset($_GET['sort'])){
+      $sort = $_GET['sort'];
+      if($sort == "t"){
+        usort($paintingsData, "cmpByTitle");
+        echo "<script>console.log('Sort by Title');</script>";
+      }
+      else if($sort == "a"){
+        usort($paintingsData, "cmpByArtist");
+        echo "<script>console.log('Sort by Artist');</script>";
+      }
+      else if($sort == "y"){
+        usort($paintingsData, "cmpByYear");
+        echo "<script>console.log('Sort by Year');</script>";
+      }
+    }
+
 
     $title = "";
     if(isset($_GET['title']))
@@ -57,7 +74,7 @@ function generateRows(){
     //if a title isset
     if($title != ""){
       foreach($paintingsData as $painting){  
-        if(strpos($painting->Title,$title) != false){//if the title form data is part of the title
+        if(stripos($painting->Title,$title) != false){//if the title form data is part of the title
           //echo "<script>console.log('Adding PaintingID:$painting->$PaintingID');</script>";
           array_push($tablePaintings, $painting);//add the painting to the list of paintings to be added to the talbe
         }
@@ -67,7 +84,6 @@ function generateRows(){
     //if an artist isset
     if($artist !== 0 && isset($artist)){//if there is an artist selected
       foreach($paintingsData as $painting){
-        echo "<script>console.log('$painting->ArtistID');</script>";
         if($artist == $painting->ArtistID){//if the ArtistIDs are the same
           //echo "<script>console.log('Adding PaintingID:$painting->$PaintingID');</script>";
           array_push($tablePaintings, $painting);
@@ -122,8 +138,14 @@ function generateRows(){
   }
 }
 
-function cmp($a, $b) {
+function cmpByYear($a, $b) {
   return strcmp($a->YearOfWork, $b->YearOfWork);
+}
+function cmpByArtist($a, $b) {
+  return strcmp($a->ArtistID, $b->ArtistID);
+}
+function cmpByTitle($a, $b) {
+  return strcmp($a->Title, $b->Title);
 }
 
 function getSinglePainting($painting){
@@ -227,15 +249,14 @@ background-repeat: no-repeat;">
 
       <table class="table">
 
-        <tr class="left">
+        <tr class="left top">
           <th></th> <!-- This col is where the paintings will go -->
-          <th>Artist</th>
-          <th>Title</th>
-          <th>Year</th>
+          <th><a class="filter-button" href="./browse-paintings.php?title=<?=$_GET['title']?>&artist=<?=$_GET['artist']?>&gallery=<?=$_GET['gallery']?>&sort=a">Artist</a></th>
+          <th><a class="filter-button" href="./browse-paintings.php?title=<?=$_GET['title']?>&artist=<?=$_GET['artist']?>&gallery=<?=$_GET['gallery']?>&sort=t">Title</a></th>
+          <th><a class="filter-button" href="./browse-paintings.php?title=<?=$_GET['title']?>&artist=<?=$_GET['artist']?>&gallery=<?=$_GET['gallery']?>&sort=y">Year</a></th>
           <th></th> <!-- This col is where the Add Favorite buttons go -->
           <th></th> <!-- This col is where the View buttons go -->
         </tr>
-
 <!-- Portrait of Pedro
         <tr class="left">
           <td><img src="./images/paintings/square/001050.jpg" class="table-img" /></td>
@@ -246,7 +267,6 @@ background-repeat: no-repeat;">
           <td><a class="view-button">View</a></td>
         </tr>
 -->
-
         <?php 
           generateRows();
         ?>
