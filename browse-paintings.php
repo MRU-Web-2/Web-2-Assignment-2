@@ -36,9 +36,13 @@ function generateRows(){
     usort($paintingsData, "cmp");
     $tablePaintings = array();
 
-    $title = $_GET['title'];
-    $artist = $_GET['artist'];
-    $gallery = $_GET['gallery'];
+    $title = "";
+    if(isset($_GET['title']))
+      $title = $_GET['title'];
+    if(isset($_GET['artist']))
+      $artist = $_GET['artist'];
+    if(isset($_GET['gallery']))
+      $gallery = $_GET['gallery'];
     if(isset($_GET['before']))
       $before = $_GET['before'];
     if(isset($_GET['after']))
@@ -128,8 +132,10 @@ function getSinglePainting($painting){
   echo "<td>".getArtistNameWhereIDis($painting->ArtistID)."</td>";
   echo "<td>$painting->Title</td>";
   echo "<td>$painting->YearOfWork</td>";
-  echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "' class='atf-button'>Add To Favourites</a></td>";
-  echo "<td><a class='view-button'>View</a></td>";
+  //echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "' class='atf-button'>Add To Favourites</a></td>";
+  echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "'><img src='./images/star/empty-star.png'  class='atf-button'/></a></td>";
+  //echo "<td><a class='view-button'>View</a></td>";
+  echo "<td><a href='single-painting.php?painting=" . $painting->PaintingID . "'><img src='./images/view/view.png'  class='view-button'/></a></td>";
   echo "</tr>";
 }
 
@@ -238,7 +244,7 @@ background-repeat: repeat;
           <th></th> <!-- This col is where the Add Favorite buttons go -->
           <th></th> <!-- This col is where the View buttons go -->
         </tr>
-        
+
 <!-- Portrait of Pedro
         <tr class="left">
           <td><img src="./images/paintings/square/001050.jpg" class="table-img" /></td>

@@ -83,10 +83,17 @@ td{
     border: black solid 1px;
     border-radius: 5px;
     padding: 5px;
-    background: #55c;
-
+    background-color: rgba(33,33,99,0.3);
+    width: 25px;
 }
-.atf-button:hover, .view-button:hover{
-    color:lightskyblue;
+.atf-button:hover{
     cursor: pointer;
+    content: url("../images/star/star.png");
+    background-color: rgba(33,33,99,0.5);
+    border: white solid 1px;
+}
+.view-button:hover{
+    cursor: pointer;
+    background-color: rgba(33,33,99,0.5);
+    border: white solid 1px;
 }
