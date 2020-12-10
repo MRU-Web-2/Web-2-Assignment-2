@@ -144,15 +144,9 @@ class ArtistDB
     }
 }
 
-<<<<<<< HEAD
 class CustomerDB
 {
     private static $baseSQL = "SELECT * FROM customrlogon";
-=======
-class CustomerLogonDB
-{
-    private static $baseSQL = "SELECT * FROM customerlogon";
->>>>>>> 304f72943dd2bbddf9faa5c425e91f8ea1c5ccb0
 
     public function __construct($connection)
     {
@@ -166,10 +160,8 @@ class CustomerLogonDB
             DatabaseHelper::runQuery($this->pdo, $sql, null);
         return $statement->fetchAll();
     }
-<<<<<<< HEAD
-=======
 
-    public function getAllForArtist($aristID)
+    public function getAllForArtist($artistID)
     {
         $sql = self::$baseSQL . " WHERE ArtistID=?";
         $statement = DatabaseHelper::runQuery(
@@ -179,5 +171,4 @@ class CustomerLogonDB
         );
         return $statement->fetchAll();
     }
->>>>>>> 304f72943dd2bbddf9faa5c425e91f8ea1c5ccb0
 }
