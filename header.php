@@ -23,12 +23,21 @@
             <a href="about.php" class="nav-links">About</a>
         </li>
         <?php
-            $var = 1;
+            # This code is courteysy of: 
+            # https://thisinterestsme.com/check-if-session-started-php/
+            # If no session currently exists, this header will start a session
+            if(session_status() == PHP_SESSION_NONE){
+                //session has not started
+                session_start();
+            }
             # If a user is loged in, then use the 'Logout' keyphrase
-            if ($var == 0) {
+            if ( isset($_SESSION['user']) ) {
                 echo "
                 <li>
-                    <a href='index.php' class='nav-links'>Logout</a>
+                    <a href='favourites.php' class='nav-links'>Favourites</a>
+                </li>
+                <li>
+                    <a href='logout.php' class='nav-links'>Logout</a>
                 </li>";
             } else {
                 echo "

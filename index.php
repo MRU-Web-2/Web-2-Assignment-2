@@ -2,8 +2,12 @@
 
 include('config.inc.php');
 
-
-
+session_start();
+// If a user session currently exists, re-route to loggedIn.php
+if ( isset($_SESSION['user'])) {
+  header('Location: loggedIn.php');
+  exit();
+}
 
 
 ?> -->

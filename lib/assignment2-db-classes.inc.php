@@ -161,14 +161,14 @@ class CustomerDB
         return $statement->fetchAll();
     }
 
-    public function getAllForArtist($artistID)
+    public function getByUserName($username)
     {
-        $sql = self::$baseSQL . " WHERE ArtistID=?";
+        $sql = self::$baseSQL . " WHERE UserName=?";
         $statement = DatabaseHelper::runQuery(
             $this->pdo,
             $sql,
-            array($artistID)
+            array($username)
         );
-        return $statement->fetchAll();
+        return $statement->fetch();
     }
 }
