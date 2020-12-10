@@ -12,9 +12,7 @@ background-repeat: no-repeat;
     text-align: center;">
     <style>
     p {
-  display:block; /* the default for span */
-  
-  
+  display:block;
 }
 
  h1{
