@@ -1,4 +1,4 @@
-<?php
+<?php 
 
 require_once('includes/stock-config.inc.php');
 require_once('lib/assignment2-db-classes.inc.php');
@@ -14,12 +14,9 @@ try {
   die($e->getMessage());
 }
 
-function getAllArtists($artists)
-{
-
-
-  foreach ($artists as $row) {
-    getSingleArtists($row);
+function getAllArtists($artists) {
+  foreach($artists as $row){
+      getSingleArtists($row);
   }
 }
 
