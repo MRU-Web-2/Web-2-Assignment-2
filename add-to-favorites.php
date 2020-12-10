@@ -31,10 +31,9 @@ try {
     <main>
         <p>painting sucessfully added</p>
         <form action='single-painting.php' method="get">
-            <input type='hidden' name='painting' value='7'>
+            <input type='hidden' name='painting' value='<?= $_GET["id"] ?>'>
             <input type='submit' value='Close'>
         </form>
     </main>
 </body>
-<!-- <?= $_GET["id"] ?> -->
 </html>
