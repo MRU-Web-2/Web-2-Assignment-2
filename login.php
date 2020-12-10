@@ -96,6 +96,7 @@ margin: 50px auto;
     text-align: center;
     width: 100%;
 }
+
 </style>
     
     <section class="containter">
@@ -103,12 +104,19 @@ margin: 50px auto;
             <h2>Login</h2>
             <p><?= $msg ?></p>
             <form method="post" action="login.php">
+            <div class="topnav">
                 <label for="email">Email</label>
+                
+                    
                 <input type="email" name="email">
+                
+                
                 
                 <label for="pass">Password</label>
                 <input type="password" name="pass">
-                <input type="submit" value="Login">
+                <input type="submit" id="button" type=button value="Login">
+                </div><br>
+               
             </form>
         </div>
     </section>
