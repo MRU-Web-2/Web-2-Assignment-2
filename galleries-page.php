@@ -69,7 +69,9 @@ function generateFile($file)
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
     <!-- This reference is for the hamburger icon, taken from: fontawesome.com-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="./style/galleries.css" rel='stylesheet'>
+    <style>
+        <?php include 'style/galleries.css'; ?>
+    </style>
 </head>
 
 <body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);

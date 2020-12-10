@@ -1,27 +1,26 @@
 <?php
-session_set_cookie_params(0);
 session_start();
-if (!$_SESSION['favorite']) {
-    $_SESSION['favorite'] = [];
+if (!$_SESSION['favs']) {
+    $_SESSION['favs'] = [];
 }
-$list = $_SESSION['favorite'];
+$list = $_SESSION['favs'];
 $_SESSION['loginStatus'] = true;
 $isLogin = $_SESSION['loginStatus'];
 
-if (isset($_GET['painting'])) {
-    $paintingID = $_GET['painting'];
+if (isset($_GET['paintings'])) {
+    $paintingID = $_GET['paintings'];
     $paintingURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?painting=' . $paintingID;
     $paintingData = json_decode(file_get_contents($paintingURL));
     $color = json_decode($paintingData[0]->JsonAnnotations);
-} else {
 }
+
 function addToFavorites()
 {
-    echo "<td><a href='add-to-favourites.php?painting=" . $_GET['painting'] . "'>Add to Favourites</a></td>";
+    echo "<td><a href='add-to-favourites.php?painting=" . $_GET['paintings'] . "'>Add to Favourites</a></td>";
 }
 function removeFromFavorites()
 {
-    echo "<td><a href='remove-from-favourites.php?painting=" . $_GET['painting'] . "'>Remove From Favourites</a></td>";
+    echo "<td><a href='remove-from-favourites.php?painting=" . $_GET['paintings'] . "'>Remove From Favourites</a></td>";
 }
 
 function displayTabs($data, $colors)
@@ -59,57 +58,7 @@ function displayTabs($data, $colors)
     <meta charset="utf-8" />
     <title>Painting Details Page</title>
     <style>
-        .color {
-            display: inline-block;
-            width: 100px;
-            height: 100px;
-
-        }
-
-        .color span {
-            color: white;
-        }
-
-        /* Style the tab */
-        .tab {
-            overflow: hidden;
-            border: 1px solid #ccc;
-            background-color: #f1f1f1;
-        }
-
-        /* Style the buttons that are used to open the tab content */
-        .tab button {
-            background-color: inherit;
-            float: left;
-            border: none;
-            outline: none;
-            cursor: pointer;
-            padding: 14px 16px;
-            transition: 0.3s;
-        }
-
-        /* Change background color of buttons on hover */
-        .tab button:hover {
-            background-color: #ddd;
-        }
-
-        /* Create an active/current tablink class */
-        .tab button.active {
-            background-color: #ccc;
-        }
-
-        /* Style the tab content */
-        .tabcontent {
-            display: none;
-            padding: 6px 12px;
-            border: 1px solid #ccc;
-            border-top: none;
-        }
-        .main{
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            padding: 10px;   
-        }
+        <?php include "style/single-painting.css"; ?>
     </style>
     <script>
         function openMenu(evt, tabs) {
@@ -140,22 +89,20 @@ background-repeat: no-repeat;">
         <header>
             <?php include("header.php"); ?>
         </header>
-        <div class="main">
-            <div>
-                <img src='painting.php?file=<?= $paintingData[0]->ImageFileName ?>&size=square' style='width:400px;height:400px'>
+        <div class='content'>
+            <img src='painting.php?file=<?= $paintingData[0]->ImageFileName ?>&size=square' style='width:800px;height:800px'>
+            <div class='info'>
                 <P>Painting Title: <?= $paintingData[0]->Title ?></P>
                 <P>Artist Name: <?= $paintingData[0]->FirstName . " " . $paintingData[0]->LastName ?></P>
                 <P>Gallery Name: <?= $paintingData[0]->GalleryName ?></P>
                 <P>Year: <?= $paintingData[0]->YearOfWork ?></P>
                 <?php
-                if ( isset($_SESSION['favs']) && in_array($_GET['painting'], $_SESSION['favs'])) {
+                if (isset($_SESSION['favs']) && in_array($_GET['paintings'], $_SESSION['favs'])) {
                     removeFromFavorites();
                 } else {
                     addToFavorites();
                 }
                 ?>
-            </div>
-            <div>
                 <!-- Tab links -->
                 <div class="tab">
                     <button class="tablinks" onclick="openMenu(event, 'Description')">Description</button>

@@ -8,7 +8,7 @@ if (isset($_GET['file']) && isset($_GET['size'])) {
         $file =  "0" . (string)$file;
     }
     header('Content-Type: image/jpeg');
-    $imgname = "images/paintings/$size/$file.jpg";
+    $imgname = "https://assignment2-297900.uc.r.appspot.com/images/paintings/$size/$file.jpg";
     $img = imagecreatefromjpeg($imgname);
     imagejpeg($img);
 }
