@@ -43,10 +43,8 @@ function noFavourites() {
 }
 
 function printUserInfo($customer) {
-  echo "<div>" . $customer->FirstName . "</div>";
-  echo "<div>" . $customer->LastName . "</div>";
-  echo "<div>" . $customer->FirstName . "</div>";
-  echo "<div>" . $customer->FirstName . "</div>";
+  echo "<div>User Name: " . $customer->UserName . "</div>";
+  echo "<div>Date Joined: " . $customer->DateJoined . "</div>";
 }
 
 ?>
