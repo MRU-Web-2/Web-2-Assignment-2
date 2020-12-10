@@ -14,7 +14,7 @@ if ( isset($_SESSION['user'])) {
 
 <head>
 <title>
- Home Page
+Assignment 2 - Home Page
 </title>
 <style>
 

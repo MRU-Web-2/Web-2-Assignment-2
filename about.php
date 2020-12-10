@@ -4,7 +4,6 @@
 <head>
     <title>Assignment 2 - About</title>
     <meta charset=utf-8>
-    <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
 </head>
 
 <body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);

@@ -1,12 +1,9 @@
 body{
-    background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* margin: 50px auto;
+    margin: 50px auto;
     text-align: center;
-    width: 100%; */
+    width: 100%;
 }
-/* .row {
+.row {
     display: flex;
     height:700px;	
 }
@@ -58,12 +55,3 @@ input {
     
     
 }
-header{
-    display: flex;
-    height:80px;	
-    background-color:lightgrey;
-    border-top:0px solid white;
-    border-left:15px solid white;
-    border-right:15px solid white;
-
-} */
