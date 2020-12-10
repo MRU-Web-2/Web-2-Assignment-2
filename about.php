@@ -9,14 +9,29 @@
 <body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
 background-size: cover;
 background-repeat: no-repeat;
-border: #eeeeee solid 10px;
+    text-align: center;">
+    <style>
+    p {
+  display:block;
+}
+
+ h1{
+     color: black;
+ }
+
+ .paragraph{
+     display:block;
+     border: #eeeeee solid 10px;
     text-align: center;
     margin: 10px;
     padding: 5px 20px;
-    background-color: #cccccc;">
+    background-color: #cccccc; 
+ } 
+
+    </style>
     <main>
         <?php include("header.php"); ?>
-        <div>
+        <div class="paragraph">
             <h1>Description:</h1>
             <p>The site allows user to search for paintings through a direct search of the painting name or various filters. <br>The site can provide the user with detailed information about each painting, Users are able to login to add <br>paintings to a favorite list. The sites can suggest paintings to the users based on the favorited paintings.</p>
             <p>The sites allow user to search for paintings </p>

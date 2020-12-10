@@ -229,18 +229,21 @@ background-repeat: no-repeat;">
           ?>
         </select></br>
 
-        <h4>Year</h4>
-        <input type="Radio" id="before" name="year" value="before">
+        <br>
+        <br>
+        <label class="filter-label">Year</label><br><br>
+        <!-- <input type="Radio" id="before" name="year" value="before"> -->
         <label for="before" class="filter-label">Before</label>
-        <input class="filter-input" id="before-text"></br>
-
-        <input type="Radio" id="after" name="year" value="after">
+        <input type="number" class="filter-input" name="before" id="before"></br>
+<!-- 
+        <input type="Radio" id="after" name="year" value="after"> -->
         <label for="after" class="filter-label">After</label>
-        <input class="filter-input" id="after-text"></br>
-
-        <input type="Radio" id="between" name="year" value="between">
+        <input type="number" class="filter-input" name="after" id="after"></br>
+<!-- 
+        <input type="Radio" id="between" name="year" value="between"> -->
         <label for="between" class="filter-label">Between</label>
-        <input class="filter-input" id="between-text"></br>
+        <input type="number" class="filter-input" name="bbefore" id="bbefore" style="margin-left: 15px;"></br>
+        <input type="number" class="filter-input" name="bafter" id="bafter" style="margin-left: 80px;"></br>
 
         <input type="submit" value="Filter" class="filter-button" id="filter">
         <input type="submit" value="Clear" class="filter-button" id="clear">
