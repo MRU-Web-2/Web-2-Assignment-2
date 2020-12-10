@@ -16,7 +16,14 @@ if ( ! isset($_SESSION['user'])) {
 Assignment 2 - Home Page
 </title>
 <style>
-
+  body{
+background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+margin: 50px auto;
+    text-align: center;
+    width: 100%;
+}
 .row {
   display: flex;
   height:700px;	
