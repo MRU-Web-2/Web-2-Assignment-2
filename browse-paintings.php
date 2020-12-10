@@ -91,8 +91,8 @@ function getArtistNameWhereIDis($ArtID){
 <style>
        body{
 background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
-background-size: cover;
-background-repeat: no-repeat;
+background-size: auto;
+background-repeat: repeat;
 /* margin: 50px auto;
     text-align: center; */
     width: 100%;
