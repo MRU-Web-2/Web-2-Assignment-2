@@ -35,7 +35,7 @@
             if ( isset($_SESSION['user']) ) {
                 echo "
                 <li>
-                    <a href='favourites.php' class='nav-links'>Favourites</a>
+                    <a href='add-to-favorites.php' class='nav-links'>Favourites</a>
                 </li>
                 <li>
                     <a href='logout.php' class='nav-links'>Logout</a>
