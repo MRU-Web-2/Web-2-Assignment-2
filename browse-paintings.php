@@ -1,20 +1,33 @@
-<!DOCTYPE html>
-<html lang=en>
-<head>
-    <title>Assignment 2 - Paintings</title>
-    <meta charset=utf-8>
-    <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
-    <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
-    <!-- This reference is for the hamburger icon, taken from: fontawesome.com-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="./style/browse.css" rel='stylesheet'>
-</head>
-<body>
 
 <?php 
+
+require_once('includes/stock-config.inc.php');
+require_once('lib/assignment2-db-classes.inc.php');
+
 // Adding the database connection to recieve saved rows 
+
+try {
+  $conn = DatabaseHelper::createConnection(array(DBCONNECTION, DBUSER, DBPASS));
+  $artGateway = new ArtistsDB($conn);
+  $artists = $artGateway->getAll();
+  $conn = null;
+} catch (Exception $e) {
+  die($e->getMessage());
+}
+
+function getAllArtists($artists) {
+
+
+  foreach($artists as $row){
+      getSingleArtists($row);
+  }
+
+}
+
+function getSingleArtist($row){
+  echo "<option value='" . $row['ArtistID'] . "'>" . $row['LastName'] . "</option>";
+}
+
 function getGalleries(){
     $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
     $galleriesData = json_decode(file_get_contents($galleriesURL));
@@ -55,6 +68,22 @@ function getArtists(){
 
 
 ?>
+
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <title>Assignment 2 - Paintings</title>
+    <meta charset=utf-8>
+    <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
+    <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <!-- This reference is for the hamburger icon, taken from: fontawesome.com-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="./style/browse.css" rel='stylesheet'>
+</head>
+<body>
+
 <?php include("header.php");?>
 <main class="grid">
 
@@ -68,7 +97,7 @@ function getArtists(){
             <select class="filter-input" id="artist">
               <option value='0'>Select Artist</option>
               <?php
-                getArtists();
+                getAllArtists($connection);
               ?>
             </select></br>
             <label class="filter-label">Gallery</label>
