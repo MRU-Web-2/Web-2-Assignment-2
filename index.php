@@ -2,9 +2,12 @@
 
 include('config.inc.php');
 
-
-
-
+session_start();
+// If a user session currently exists, re-route to loggedIn.php
+if ( isset($_SESSION['user'])) {
+  header('Location: loggedIn.php');
+  exit();
+}
 
 ?> -->
 <html>
@@ -106,40 +109,14 @@ h1 {
 
 </style>
 </head>
-<body><center>
+<body>
     <h1>Assignment 2</h1><br><br><br>
-    <a href="#" id="a" type="button" name="register" value="register" on>Log In</a>
+    <a href="login.php" id="a" type="button" name="register" value="register" on>Log In</a>
     <a href="#" id="b" type="button" name="register" value="register">Join</a><br><br><br><br>
     <div class="Searchbar">
-    <form action="browse.php" method="get" style="width: 800px; height: 150px">
+    <form action="browse-paintings.php" method="get" style="width: 800px; height: 150px">
 
-
-        <!-- <select class="ui fluid dropdown" name="museum">
-            <option value='0'>Select Museum</option>  
-            <?php  
-            //    /* add your PHP code here */
-            //    try {
-            //     $pdo = new PDO(DBCONNSTRING,DBUSER,DBPASS);
-            //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            //     $sql = "select * from Galleries order by GalleryName";
-            //     $result = $pdo->query($sql);
-            //     $data = $result -> fetchAll(PDO::FETCH_ASSOC);
-              
-                
-            //   foreach($data as $row){
-            //     echo "<option value=" . $row['GalleryID'] .">" . $row['GalleryName'] . "</option>"; 
-            //   }
-              
-            //   }
-              
-            //   catch (PDOException $e) {
-            //     die( $e->getMessage() );
-            //    }
-
-            ?> -->
-        </select>
-    <input type="search" name="search"  />
+    <input type="search" name="title"  />
     </form>
-   </center>
 </body>
 </html>

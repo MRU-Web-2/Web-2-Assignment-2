@@ -1,3 +1,42 @@
+<?php
+
+session_start();
+// if user id not in session then redirect back to login screen
+if ( ! isset($_SESSION['user'])) {
+  header('Location: login.php');
+  exit();
+}
+
+
+$paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
+$paintingsData = json_decode(file_get_contents($paintingsURL));
+
+// If the favourites exist and is not empty, this will run (view below to see where used)
+function printAllPaintingsAsImages($paintingsData) {
+    $favourites = $_SESSION['favs'];
+    foreach ($favourites as $paintingID) {
+        printSinglePainting($paintingID, $paintingsData);
+    }
+}
+function printSinglePainting($paintingID, $paintingsData) {
+    foreach ($paintingsData as $p) {
+        if ($p->PaintingID == $paintingID) {
+            $painting = $p;
+        }
+    }
+    echo "<a href='single-painting.php?painting=" . $paintingID . "'>";
+    echo "<img src='painting.php?file=" . $painting->ImageFileName . "&size=square' style='width:200px;height:200px' alt='" . $painting->Title . "'>";
+    echo "</a>";
+}
+
+// If there are no favourites yet, run this code
+function noFavourites() {
+    echo "<div id='emptyFavourites'>There are no favourites here yet</div>";
+}
+
+
+?>
+
 <html>
 
 <head>
@@ -5,7 +44,14 @@
 Assignment 2 - Home Page
 </title>
 <style>
-
+  body{
+background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+margin: 50px auto;
+    text-align: center;
+    width: 100%;
+}
 .row {
   display: flex;
   height:700px;	

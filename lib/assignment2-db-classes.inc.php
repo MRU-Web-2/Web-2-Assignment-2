@@ -105,7 +105,7 @@ class PaintingDB
 
     public function getDetailPainting($paintingID)
     {
-        $sql = 'SELECT GalleryID, Title, YearOfWork, FirstName, LastName, ImageFileName, Medium, Description, Width, Height, CopyrightText, WikiLink, MuseumLink, JsonAnnotations FROM Paintings INNER JOIN Artists ON Paintings.ArtistID = Artists.ArtistID WHERE PaintingID=?';
+        $sql = 'SELECT GalleryName, Title, YearOfWork, FirstName, LastName, ImageFileName, Medium, Description, Width, Height, CopyrightText, WikiLink, MuseumLink, JsonAnnotations FROM ((Paintings INNER JOIN Artists ON Paintings.ArtistID = Artists.ArtistID) INNER JOIN Galleries ON Paintings.GalleryID = Galleries.GalleryID) WHERE PaintingID=?';
         $statement = DatabaseHelper::runQuery(
             $this->pdo,
             $sql,
@@ -146,7 +146,7 @@ class ArtistDB
 
 class CustomerDB
 {
-    private static $baseSQL = "SELECT * FROM customerlogon";
+    private static $baseSQL = "SELECT * FROM CustomerLogon";
 
     public function __construct($connection)
     {
@@ -161,14 +161,14 @@ class CustomerDB
         return $statement->fetchAll();
     }
 
-    public function getAllForCustomer($artistID)
+    public function getByUserName($username)
     {
-        $sql = self::$baseSQL . " WHERE CustomerID=?";
+        $sql = self::$baseSQL . " WHERE UserName=?";
         $statement = DatabaseHelper::runQuery(
             $this->pdo,
             $sql,
-            array($artistID)
+            array($username)
         );
-        return $statement->fetchAll();
+        return $statement->fetch();
     }
 }

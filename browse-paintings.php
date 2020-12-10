@@ -1,9 +1,17 @@
 <?php 
 // Adding the database connection to recieve saved rows 
-
+session_start();
 function getSingleArtist($row){
   echo "<option value='" . $row['ArtistID'] . "'>" . $row['LastName'] . "</option>";
 }
+
+// Doesn't work for some reason....
+// try{
+//   $conn = DatabaseHelper::createConnection(array(DBCONNSTRING,DBUSER,DBPASS));
+
+// } catch (Exception $e) {
+//   die( $e->getMessage() );
+// }
 
 function getGalleries(){
   $galleriesURL = 'https://assignment2-297900.uc.r.appspot.com/api-galleries.php';
@@ -21,6 +29,47 @@ function getArtists(){
     echo "<option value='$artist->ArtistID'>$artist->FirstName $artist->LastName</option>";
 }
 
+function generateRows(){
+  // if any of the filters are set, then display the filters
+ if( isset($_GET['title']) || isset($_GET['artist']) || isset($_GET['gallery']) || isset($_GET['before-text']) || isset($_GET['after-text']) || isset($_GET['between-text']) ){
+    echo "<script>console.log('');</script>";
+
+ }
+  //if not, display the top 20 paintings by year
+  $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
+  $paintingsData = json_decode(file_get_contents($paintingsURL));
+  usort($paintingsData, "cmp");
+
+  for($i=0; $i<20; $i++){
+    getSinglePainting($paintingsData[$i]);
+  }
+}
+
+function cmp($a, $b) {
+  return strcmp($a->YearOfWork, $b->YearOfWork);
+}
+
+function getSinglePainting($painting){
+  echo "<tr class='left'>";
+  echo "<td><img src='./images/paintings/square/$painting->ImageFileName.jpg' title='$painting->ImageFileName' class='table-img'/></td>";
+  echo "<td>".getArtistNameWhereIDis($painting->ArtistID)."</td>";
+  echo "<td>$painting->Title</td>";
+  echo "<td>$painting->YearOfWork</td>";
+  echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "' class='atf-button'>Add To Favourites</a></td>";
+  echo "<td><a class='view-button'>View</a></td>";
+  echo "</tr>";
+}
+
+function getArtistNameWhereIDis($ArtID){
+  $artistURL = 'https://assignment2-297900.uc.r.appspot.com/api-artists.php';
+  $artistData = json_decode(file_get_contents($artistURL));
+
+  foreach($artistData as $artist){
+    if($artist->ArtistID === $ArtID){
+      return ("".$artist->FirstName." ".$artist->LastName);
+    }
+  }
+}
 
 ?>
 
@@ -40,25 +89,43 @@ function getArtists(){
 </head>
 
 <body>
+<style>
+       body{
+background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+background-size: auto;
+background-repeat: repeat;
+/* margin: 50px auto;
+    text-align: center; */
+    width: 100%;
+}
+
+</style>
 
   <?php include("header.php"); ?>
   <main class="grid">
 
     <section class="grid-box" id="paintingFilter">
       <h2>Painting Filter</h2>
-      <form>
+      <form action="./browse-paintings.php" method="GET">
+        
         <label class="filter-label">Title</label>
-        <input class="filter-input" id="title">
+        <?php
+          if ( isset($_SESSION['title'])) {
+            echo "<input class='filter-input' name='title' id='title' content=" . $_SESSION['title'] . ">";
+          } else {
+            echo "<input class='filter-input' name='title' id='title'>";
+          }
+        ?>
         </select></br>
         <label class="filter-label">Artist</label>
-        <select class="filter-input" id="artist">
+        <select class="filter-input" name='artist' id="artist">
           <option value='0'>Select Artist</option>
           <?php
           getArtists();
           ?>
         </select></br>
         <label class="filter-label">Gallery</label>
-        <select class="filter-input" id="gallery">
+        <select class="filter-input" name='gallery' id="gallery">
           <option value="0">Select Gallery</option>
           <?php
           getGalleries();
@@ -112,6 +179,9 @@ function getArtists(){
           <td><a class="view-button">View</a></td>
         </tr>
 
+        <?php 
+          generateRows();
+        ?>
       </table>
 
     </section>

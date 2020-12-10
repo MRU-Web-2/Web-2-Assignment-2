@@ -8,9 +8,12 @@
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
 </head>
-<body>
+<body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
+background-size: cover;
+background-repeat: no-repeat;">
+<?php include("header.php");?>
 <main>
-    <?php include("header.php");?>
+    
     <div>
     </div>  
 </main>

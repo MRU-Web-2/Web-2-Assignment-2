@@ -22,11 +22,6 @@ function sortByName($a, $b)
     return  $a->GalleryName > $b->GalleryName;
 }
 
-function sortByArtist($a, $b)
-{
-    //return a$->ArtistLastName 
-}
-
 function getPaintings()
 {
     $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
@@ -77,7 +72,9 @@ function generateFile($file)
     <link href="./style/galleries.css" rel='stylesheet'>
 </head>
 
-<body>
+<body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
+background-size: cover;
+background-repeat: no-repeat;">
     <?php include("header.php"); ?>
     <main class="grid">
         <section class="grid-box" id="paintingFilter">

@@ -7,14 +7,15 @@
         <i style="font-size:34px" class="fa">&#xf0c9;</i>
     </span>
 
-    <a href="index.php" class="logo">Logo</a>
+    <a href="index.php" class="logo"><img src = "images/rhondak-native-florida-folk-artist-_Yc7OtfFn-0-unsplash.jpg" ></a>
+    
 
     <ul class="main-nav" id="js-menu">
         <li>
             <a href="index.php" class="nav-links">Home</a>
         </li>
         <li>
-            <a href="#" class="nav-links">Galleries</a>
+            <a href="galleries-page.php" class="nav-links">Galleries</a>
         </li>
         <li>
             <a href="browse-paintings.php" class="nav-links">Browse</a>
@@ -23,12 +24,21 @@
             <a href="about.php" class="nav-links">About</a>
         </li>
         <?php
-            $var = 1;
+            # This code is courteysy of: 
+            # https://thisinterestsme.com/check-if-session-started-php/
+            # If no session currently exists, this header will start a session
+            if(session_status() == PHP_SESSION_NONE){
+                //session has not started
+                session_start();
+            }
             # If a user is loged in, then use the 'Logout' keyphrase
-            if ($var == 0) {
+            if ( isset($_SESSION['user']) ) {
                 echo "
                 <li>
-                    <a href='index.php' class='nav-links'>Logout</a>
+                    <a href='favourites.php' class='nav-links'>Favourites</a>
+                </li>
+                <li>
+                    <a href='logout.php' class='nav-links'>Logout</a>
                 </li>";
             } else {
                 echo "
@@ -80,6 +90,12 @@ navBarToggle.addEventListener('click', function () {
     font-size: 22px;
     margin-top: 10px;
     margin-left: 20px;
+}
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1px;
+  width: 50px;
 }
 .navbar-toggle {
     position: absolute;
