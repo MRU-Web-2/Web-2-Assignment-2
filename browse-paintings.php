@@ -88,6 +88,17 @@ function getArtistNameWhereIDis($ArtID){
 </head>
 
 <body>
+<style>
+       body{
+background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+background-size: cover;
+background-repeat: no-repeat;
+/* margin: 50px auto;
+    text-align: center; */
+    width: 100%;
+}
+
+</style>
 
   <?php include("header.php"); ?>
   <main class="grid">
