@@ -27,14 +27,30 @@ function getArtists(){
   $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php';
   $paintingsData = json_decode(file_get_contents($paintingsURL));
   $artists = array();
-  foreach($paintingsData as $painting)
+  $i = 0;
+  foreach($paintingsData as $painting){
+  echo "<script>console.log('Debug Objects: " . $i++ . "' );</script>";
     $found = false;
     foreach($artists as $artist){
-      if($painting->Artist){
-
+      if($painting->ArtistID == $artist->id){
+        $found = true;
+        echo "<script>console.log('Debug Objects: FOUND'" . $artist->id . " );</script>";
       }
     }
-    echo "<option value='$gallery->Artist'>$gallery->GalleryName</option>";
+
+    if($found === false){//if the artist is not already found in the array, add it to the array. 
+      // $newArtist = (object) array('id' => $painting->ArtistID, 'name' => $painting->ArtistName);
+      // array_push($artists, $newArtist);//adds a new element to the end of the array
+      echo "<option value='$painting->ArtistID'>$painting->LastName</option>";
+
+    }
+  }
+
+  // //now that the $artists array is complete, let's pump out the artists
+  // foreach($artists as $artist){
+  //   echo "<script>console.log('Debug Objects: " . $artist->id . "' );</script>";
+  //   echo "<option value='$artist->id'>$artist->name</option>";
+  // }
 }
 
 
