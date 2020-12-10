@@ -222,7 +222,7 @@ background-repeat: no-repeat;">
     </section>
 
 
-    <section class="grid-box" id="paintings">
+    <section class="grid-box overflow" id="paintings">
       <h2>Paintings</h2>
 
       <table class="table">
