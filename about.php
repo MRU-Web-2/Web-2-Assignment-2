@@ -20,8 +20,9 @@ margin: 50px auto;
 }
 
 </style>
+<?php include("header.php");?>
 <main>
-    <?php include("header.php");?>
+    
     <div>
     </div>  
 </main>

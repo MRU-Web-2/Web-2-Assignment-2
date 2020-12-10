@@ -23,7 +23,7 @@ function sortByName($a, $b)
 }
 
 function sortByArtist($a, $b) { 
-    return a$->ArtistLastName 
+    return $a->ArtistLastName;
 }
 
 function getPaintings()
@@ -76,7 +76,9 @@ function generateFile($file)
     <link href="./style/galleries.css" rel='stylesheet'>
 </head>
 
-<body>
+<body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
+background-size: cover;
+background-repeat: no-repeat;">
     <?php include("header.php"); ?>
     <main class="grid">
         <section class="grid-box" id="paintingFilter">

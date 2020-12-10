@@ -55,7 +55,7 @@ function getSinglePainting($painting){
   echo "<td>".getArtistNameWhereIDis($painting->ArtistID)."</td>";
   echo "<td>$painting->Title</td>";
   echo "<td>$painting->YearOfWork</td>";
-  echo "<td><a class='atf-button'>Add To Favourites</a></td>";
+  echo "<td><a href='add-to-favourites.php?painting=" . $painting->PaintingID . "' class='atf-button'>Add To Favourites</a></td>";
   echo "<td><a class='view-button'>View</a></td>";
   echo "</tr>";
 }

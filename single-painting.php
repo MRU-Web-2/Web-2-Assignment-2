@@ -27,7 +27,7 @@ function addToFavorites($isLogin)
         }
         if (!$favorited) {
             $id = $_GET['painting'];
-            echo "<form action='add-to-favorites.php' method='get'>";
+            echo "<form action='add-to-favourites.php' method='get'>";
             echo "<input name='id' value='$id' type='hidden'>";
             echo "<button type='submit' >Add to Favorites</button>";
             echo "</form>";
@@ -145,7 +145,7 @@ function displayTabs($data, $colors)
             <?php include("header.php"); ?>
         </header>
         <div>
-            <img src='painting.php?file=<?= $paintingData[0]->ImageFileName ?>&size=square'>
+            <img src='painting.php?file=<?= $paintingData[0]->ImageFileName ?>&size=square' style='width:400px;height:400px'>
             <P>Painting Title: <?= $paintingData[0]->Title ?></P>
             <P>Artist Name: <?= $paintingData[0]->FirstName . " " . $paintingData[0]->LastName ?></P>
             <P>Gallery Name: <?= $paintingData[0]->GalleryName ?></P>
