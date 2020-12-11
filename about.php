@@ -2,17 +2,40 @@
 <html lang=en>
 
 <head>
-    <title>Assignment 2 - About</title>
+    <title>Lab 14</title>
     <meta charset=utf-8>
     <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
     <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
+    <style>
+        p {
+            display: block;
+        }
+
+        h1 {
+            color: black;
+        }
+
+        .paragraph {
+            display: block;
+            border: #eeeeee solid 10px;
+            text-align: center;
+            margin: 10px;
+            padding: 5px 20px;
+            background-color: #cccccc;
+        }
+    </style>
 </head>
 
 <body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
 background-size: cover;
-background-repeat: no-repeat;">
+background-repeat: no-repeat;
+border: #eeeeee solid 10px;
+    text-align: center;
+    margin: 10px;
+    padding: 5px 20px;
+    background-color: #cccccc;">
     <main>
         <?php include("header.php"); ?>
         <div>
@@ -32,6 +55,10 @@ background-repeat: no-repeat;">
             <p>Zain: https://github.com/Zain4271</p>
             <p>Project Repo: https://github.com/MRU-Web-2/Web-2-Assignment-2</p>
             <h1>Sources:</h1>
+            <p>Header resource from ITNext.io: https://itnext.io/how-to-build-a-responsive-navbar-using-flexbox-and-javascript-eb0af24f19bf</p>
+            <p>PHP Code for checking to see if a Session is running: https://thisinterestsme.com/check-if-session-started-php/</p>
+            <p></p>
+            <p></p>
         </div>
     </main>
 </body>

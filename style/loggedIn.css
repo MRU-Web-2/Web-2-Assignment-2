@@ -1,12 +1,16 @@
 body{
-    background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
-    background-size: cover;
-    background-repeat: no-repeat;
-    /* margin: 50px auto;
+    margin: 50px auto;
     text-align: center;
-    width: 100%; */
+    width: 100%;
 }
-/* .row {
+.boxStuff {
+    border: #eeeeee solid 10px;
+    text-align: center;
+    margin: 10px;
+    padding: 5px 20px;
+    background-color: #cccccc;
+}
+.row {
     display: flex;
     height:700px;	
 }
@@ -58,12 +62,29 @@ input {
     
     
 }
-header{
-    display: flex;
-    height:80px;	
-    background-color:lightgrey;
-    border-top:0px solid white;
-    border-left:15px solid white;
-    border-right:15px solid white;
 
-} */
+main {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto 300px 400px;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    padding: 10px;
+    margin: 20px;
+}
+#userinfo{
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+#favourites{
+    grid-row-start: 3;
+    grid-row-end: 7;
+}
+#search{
+    grid-row-start: 1;
+    grid-row-end: 2;
+}
+#maylike{
+    grid-row-start: 2;
+    grid-row-end: 7;
+}
