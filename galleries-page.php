@@ -1,5 +1,6 @@
 <?php
 /* add your PHP code here */
+require_once 'asg2-helpers.inc.php';
 
 //https://www.codegrepper.com/code-examples/php/php+sort+json+array
 function getGalleries()
@@ -27,7 +28,9 @@ function getPaintings()
 function getArtists()
 {
     $artistURL = "https://assignment2-297900.uc.r.appspot.com/api-artists.php";
-    return $artistURL;
+    $artistData = json_decode(file_get_contents($artistURL));
+
+    return $artistData;
 }
 
 function boxA_Gen()
@@ -202,6 +205,35 @@ function boxC_Gen()
             populateGallery(g);
         });
 
+        //adds event listeners on all list items so their attributes populate box a.
+        document.querySelectorAll("li").forEach(listItem => {
+            listItem.addEventListener('click', (e) => {
+
+                //assign variables to transfer to galDetails function
+                let name = e.target.textContent;
+                let natName = e.target.getAttribute('natName');
+                let city = e.target.getAttribute('city');
+                let address = e.target.getAttribute('address');
+                let country = e.target.getAttribute('country');
+                let home = e.target.getAttribute('home');
+                let lat = parseFloat(e.target.getAttribute('latitude'));
+                let lon = parseFloat(e.target.getAttribute('longitude'));
+
+                //Concat from https://www.w3schools.com/jsref/jsref_concat_string.asp
+                //Combines url with id of paintings to generate a specific gallery's list of paintings
+                let paintURL = "<?php echo getPaintings(); ?>".concat(e.target.id);
+                //calls several functions to fulfill rest of the functionality
+                //box a filled with gallery details
+                galDetails(name, natName, city, address, country, home);
+                //marker created at location of gallery
+                createMarker(map, lat, lon, city);
+                //map is moved to location of gallery
+                moveLocation(lat, lon);
+                //painting list is generated based on gallery
+                createPaintings(e.target, paintURL);
+            });
+        });
+
         /**
          * Populates box b with fetched array of galleries
          *
@@ -228,41 +260,7 @@ function boxC_Gen()
             li.setAttribute('longitude', galleries.Longitude);
             li.setAttribute('id', galleries.GalleryID);
             uList.appendChild(li);
-
-
-            //adds event listeners on all list items so their attributes populate box a.
-            document.querySelectorAll("li").forEach(listItem => {
-                listItem.addEventListener('click', (e) => {
-
-                    //assign variables to transfer to galDetails function
-                    let name = e.target.textContent;
-                    let natName = e.target.getAttribute('natName');
-                    let city = e.target.getAttribute('city');
-                    let address = e.target.getAttribute('address');
-                    let country = e.target.getAttribute('country');
-                    let home = e.target.getAttribute('home');
-                    let lat = parseFloat(e.target.getAttribute('latitude'));
-                    let lon = parseFloat(e.target.getAttribute('longitude'));
-
-                    //Concat from https://www.w3schools.com/jsref/jsref_concat_string.asp
-                    //Combines url with id of paintings to generate a specific gallery's list of paintings
-                    let paintURL = "<?php echo getPaintings(); ?>".concat(e.target.id);
-
-                    //calls several functions to fulfill rest of the functionality
-                    //box a filled with gallery details
-                    galDetails(name, natName, city, address, country, home);
-                    //marker created at location of gallery
-                    createMarker(map, lat, lon, city);
-                    //map is moved to location of gallery
-                    moveLocation(lat, lon);
-                    //painting list is generated based on gallery
-                    let count = 0;
-                    createPaintings(e.target, paintURL, count);
-                });
-            });
         }
-
-
 
         function galDetails(name, native, city, address, country, home) {
 
@@ -281,8 +279,8 @@ function boxC_Gen()
             detail6.textContent = home;
         }
 
-        function createPaintings(gallery, paintURL, count) {
-            console.log(count);
+        function createPaintings(gallery, paintURL) {
+
             //generate table
             let table = document.querySelector('#paintingList');
             table.innerHTML = "";
@@ -318,20 +316,27 @@ function boxC_Gen()
             table.appendChild(tableBody);
 
             //fetches for paintings from a specific gallery
+
             fetch(paintURL)
                 .then(response => response.json())
                 .then(paintings => {
                     //grabs array of paintings from updated url2
                     pTableSorter = Array.from(paintings);
 
-                    //calls array to perform a default sort based on last names 
-                    yearSort(pTableSorter, gallery);
+                    //Gets artist array to sort names 
+                    aNameSorter =
 
-                    //events appended to headers to sort based on lastname, title or year          
-                    title.addEventListener('click', (e) => {
-                        titleSort(pTableSorter, gallery)
-                    });
+                        //calls array to perform a default sort based on year 
+                        yearSort(pTableSorter, gallery);
+
+                    //events appended to headers to sort based on lastname or title          
                     year.addEventListener('click', (e) => {
+                        yearSort(pTableSorter, gallery);
+                    });
+                    title.addEventListener('click', (e) => {
+                        titleSort(pTableSorter, gallery);
+                    });
+                    artist.addEventListener('click', (e) => {
                         lastNameSort(pTableSorter, gallery);
                     });
                 })
@@ -394,7 +399,7 @@ function boxC_Gen()
 
             //sorts based on last name 
             pTableSorter.sort((a, b) => {
-                return a.LastName < b.LastName ? -1 : 1;
+                return a.LastName < b.ArtistID ? -1 : 1;
             });
             paintingTableCreate(pTableSorter, gallery);
         }
@@ -411,7 +416,9 @@ function boxC_Gen()
          */
 
         function paintingTableCreate(pArraySort, gallery) {
+            let artistData = Array.from(<?php echo json_encode(getArtists()); ?>);
             let imgPath = "./images/paintings/square/";
+
 
             //creates tableBody to differentiate between contents and headings
             //empties itself to generate a new list based on a new passed sorted array
@@ -420,50 +427,55 @@ function boxC_Gen()
 
             //iterates through sorted array
             //generates a table of paintings and associated values through passed value  
-            console.log(gallery);
-            console.log(gallery.id);
-            if (pArraySort.GalleryID = gallery.id) {
-                pArraySort.forEach(p => {
-                    let row = document.createElement('tr');
-                    row.setAttribute('id', 'tableRow');
+            pArraySort.forEach(p => {
+                let row = document.createElement('tr');
+                row.setAttribute('id', 'tableRow');
 
-                    //produces cell where painting thumnails are to be located 
-                    let thumbnailCell = document.createElement('td');
-                    let thumbnail = document.createElement('img');
-                    thumbnail.setAttribute('src', imgPath.concat(imgFileNameFix(p.ImageFileName.toString())));
-                    thumbnail.setAttribute('class', 'link');
-                    thumbnail.setAttribute('id', p.PaintingID);
-                    thumbnailCell.appendChild(thumbnail);
+                //produces cell where painting thumnails are to be located 
+                let thumbnailCell = document.createElement('td');
+                let thumbnail = document.createElement('img');
+                thumbnail.setAttribute('src', imgPath.concat(imgFileNameFix(p.ImageFileName.toString())));
+                thumbnail.setAttribute('class', 'link');
+                thumbnail.setAttribute('id', p.PaintingID);
+                thumbnailCell.appendChild(thumbnail);
 
-                    //produces cell where artist names are to be listed 
-                    //if conditional to test whether said artist is referred to by only his last name or not
-                    let artistCell = document.createElement('td');
-                    if (p.FirstName == null) {
-                        artistCell.textContent = p.LastName;
-                    } else {
-                        artistCell.textContent = (p.FirstName + " " + p.LastName);
+                //produces cell where artist names are to be listed 
+                //if conditional to test whether said artist is referred to by only his last name or not
+                let artistCell;
+                artistData.forEach(a => {
+                    if (p.ArtistID == a.ArtistID) {
+                        if (a.FirstName == null) {
+                            console.log(a.FirstName);
+                            artistCell = document.createElement('td');
+                            artistCell.textContent = a.LastName;
+                        } else {
+                            console.log(a.FirstName);
+                            artistCell = document.createElement('td');
+                            artistCell.textContent = (a.FirstName + " " + a.LastName);
+                        }
                     }
-
-                    //produces titlecell where titles are to be listed             
-                    let titleCell = document.createElement('td');
-                    titleCell.setAttribute('id', 'title');
-                    titleCell.textContent = p.Title;
-
-                    //produces yearcell where years are to be listed             
-                    let yearCell = document.createElement('td');
-                    yearCell.setAttribute('id', 'year');
-                    yearCell.textContent = p.YearOfWork;
-
-                    row.appendChild(thumbnailCell);
-                    row.appendChild(artistCell);
-                    row.appendChild(titleCell);
-                    row.appendChild(yearCell);
-                    tableBody.appendChild(row);
-
-                    //display box c 
-                    document.querySelector(".box.c section").style.display = "block";
                 });
-            }
+
+                //produces titlecell where titles are to be listed             
+                let titleCell = document.createElement('td');
+                titleCell.setAttribute('id', 'title');
+                titleCell.textContent = p.Title;
+
+                //produces yearcell where years are to be listed             
+                let yearCell = document.createElement('td');
+                yearCell.setAttribute('id', 'year');
+                yearCell.textContent = p.YearOfWork;
+
+                row.appendChild(thumbnailCell);
+                row.appendChild(artistCell);
+                row.appendChild(titleCell);
+                row.appendChild(yearCell);
+                tableBody.appendChild(row);
+
+                //display box c 
+                document.querySelector(".box.c section").style.display = "block";
+            });
+
             //creating event handlers for all thumbnails
             //additionally generating an updated URL for further passing 
             document.querySelectorAll(".link").forEach(rows => {
