@@ -3,6 +3,7 @@
 require_once 'asg2-helpers.inc.php';
 include("header.php");
 
+//function gets galleries data, invokes a sort function and returns data of galleries 
 //https://www.codegrepper.com/code-examples/php/php+sort+json+array
 function getGalleries()
 {
@@ -14,18 +15,19 @@ function getGalleries()
     return $galleriesData;
 }
 
+//function sorts galleries data by gallery name, then returns it
 function sortByName($a, $b)
 {
     return  $a->GalleryName > $b->GalleryName;
 }
 
+//function returns paintings url 
 function getPaintings()
 {
-    $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?gallery=';
-
-    return $paintingsURL;
+    return 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?gallery=';
 }
 
+//function gets artists data and returns it. Sadly it is defunct and doesn't work. 
 function getArtists()
 {
     $artistURL = "https://assignment2-297900.uc.r.appspot.com/api-artists.php";
@@ -33,6 +35,7 @@ function getArtists()
     return $artistData;
 }
 
+//generates details of box A which hosts gallery details 
 function boxA_Gen()
 {
     echo "<section>";
@@ -51,6 +54,7 @@ function boxA_Gen()
     echo "</section>";
 }
 
+//generates details of box b which has a list of outputted galleries for the user to choose from 
 function boxB_Gen()
 {
     echo "<section>";
@@ -59,6 +63,7 @@ function boxB_Gen()
     echo "</section>";
 }
 
+//generates details of box c which hosts a list of paintings located within a gallery 
 function boxC_Gen()
 {
     echo "<section>";
