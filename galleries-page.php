@@ -72,6 +72,7 @@ function boxC_Gen()
 <html>
 
 <head>
+    <?php include("header.php"); ?>
     <title>Assignment 2 Galleries Page</title>
     <meta charset=utf-8>
     <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
