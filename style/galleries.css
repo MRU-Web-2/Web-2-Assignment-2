@@ -1,6 +1,11 @@
 body {
     margin: 40px;
+    background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
+    background-size: cover;
+    background-attachment: fixed;
     background-color: #e9e9e9;
+    width: auto;
+    height: auto; 
     font-family: Open Sans, sans-serif;
     font-size: 0.9rem;
 }
@@ -15,6 +20,7 @@ body {
 .box {
     min-width: 240px;
     border: #eeeeee solid 10px;
+    border-radius: 5px;
     margin: 10px;
     padding: 20px;
     background-color: #cccccc;
@@ -49,12 +55,6 @@ body {
   grid-row: 3;
 }
 
-.e {
-  display: none; 
-  grid-column: 1 / span 4;
-  grid-row: 2 / span 3;
-}
-
 ul#galleryList {
   list-style-type: none;
   margin: 0;
@@ -70,21 +70,20 @@ ul#uList2 li {
     margin-bottom: 10px;
 }
 
-section { 
-   background-color: #cfcfcf;
-   border-radius: 5px;
-   padding: 20px;
-}
-
 div.a section {
-    display: block;		/* programmatically change this to "grid" when gallery clicked */
-    margin-top:20px;
+    display: none;		/* programmatically change this to "grid" when gallery clicked */
     grid-gap: 5px;
     grid-template-columns: 10rem auto;
+    text-align: center;
 }
 
-#galleryName { 
-    justify-content: center; 
+#galleryName {
+    position: relative;
+    right: 85px;
+}
+
+label { 
+    font-weight: bold;
 }
 
 div.b section {
@@ -92,24 +91,21 @@ div.b section {
 }
 
 div.c section {
-    display: block;    /* programmatically change this to "block" when gallery clicked */
+    display: none;    /* programmatically change this to "block" when gallery clicked */
 }
 
 div.d section {
-    display: block;    /* programmatically change this to "block" when gallery clicked */
+    display: none;    /* programmatically change this to "block" when gallery clicked */
 }
 
-div.e section { 
-    display: block;
-}
 
 #map  {
      height: 500px; 
-     margin: 30px auto auto auto; 
 }
 
 table {
-    width: 100%;    
+    width: 100%;  
+    border-spacing: 15px 0px  
 }
 
 tr#tableHeading { 
@@ -119,11 +115,6 @@ tr#tableHeading {
 th:hover { 
     cursor: pointer;
 } 
-
-.link:hover { 
-    cursor: pointer;
-    opacity: 0.8;
-}
 
 #txtBody { 
     background-color: #cfcfcf;

@@ -1,6 +1,7 @@
 <?php
 /* add your PHP code here */
 require_once 'asg2-helpers.inc.php';
+include("header.php");
 
 //https://www.codegrepper.com/code-examples/php/php+sort+json+array
 function getGalleries()
@@ -29,7 +30,6 @@ function getArtists()
 {
     $artistURL = "https://assignment2-297900.uc.r.appspot.com/api-artists.php";
     $artistData = json_decode(file_get_contents($artistURL));
-
     return $artistData;
 }
 
@@ -38,7 +38,7 @@ function boxA_Gen()
     echo "<section>";
     echo "<label></label>";
     echo "<h2 id='galleryName'></h2>";
-    echo "<label>'Native Name:'</label>";
+    echo "<label>Native Name:</label>";
     echo "<span id='galleryNative'></span>";
     echo "<label>City:</label>";
     echo "<span id='galleryCity'></span>";
@@ -86,7 +86,6 @@ function boxC_Gen()
 </head>
 
 <body>
-    <?php include("header.php"); ?>
     <main class="container">
         <div class="box a">
             <?php
@@ -107,9 +106,6 @@ function boxC_Gen()
             ?>
         </div>
     </main>
-    <footer class="ui black inverted segment">
-        <div class="ui container">This is the footer</div>
-    </footer>
     <script type="text/javascript">
         /** 
          * Borrows design elements of Lab 10 test your knowledge 5, though it has been altered 
@@ -193,13 +189,11 @@ function boxC_Gen()
         //fetch gallery data from url 
         let galleriesData;
         if (localStorage.hasOwnProperty("galleries")) {
-            galleriesData = Array.from(localStorage.getItem("galleries"));
-            alert("Local storage successful");
-            localStorage.clear();
+            galleriesData = JSON.parse(localStorage.getItem("galleries"));
         } else {
             galleriesData = Array.from(<?php echo json_encode(getGalleries()); ?>);
-            //localStorage.setItem("galleries", JSON.stringify(galleriesData));
-            alert("Grabbing from JSON php");
+            localStorage.setItem("galleries", galleriesData);
+            console.log(galleriesData);
         }
 
         //pass that data to populateGallery function
@@ -220,6 +214,9 @@ function boxC_Gen()
                 let home = e.target.getAttribute('home');
                 let lat = parseFloat(e.target.getAttribute('latitude'));
                 let lon = parseFloat(e.target.getAttribute('longitude'));
+
+                document.querySelector(".box.a section").style.display = "grid";
+
 
                 //Concat from https://www.w3schools.com/jsref/jsref_concat_string.asp
                 //Combines url with id of paintings to generate a specific gallery's list of paintings
@@ -432,12 +429,10 @@ function boxC_Gen()
             pArraySort.forEach(p => {
                 let row = document.createElement('tr');
                 row.setAttribute('id', 'tableRow');
-
                 //produces cell where painting thumnails are to be located 
                 let thumbnailCell = document.createElement('td');
                 let thumbnail = document.createElement('img');
                 thumbnail.setAttribute('src', imgPath.concat(imgFileNameFix(p.ImageFileName.toString())));
-                thumbnail.setAttribute('class', 'link');
                 thumbnail.setAttribute('id', p.PaintingID);
                 thumbnailCell.appendChild(thumbnail);
 
@@ -447,11 +442,9 @@ function boxC_Gen()
                 artistData.forEach(a => {
                     if (p.ArtistID == a.ArtistID) {
                         if (a.FirstName == null) {
-                            console.log(a.FirstName);
                             artistCell = document.createElement('td');
                             artistCell.textContent = a.LastName;
                         } else {
-                            console.log(a.FirstName);
                             artistCell = document.createElement('td');
                             artistCell.textContent = (a.FirstName + " " + a.LastName);
                         }
@@ -461,7 +454,10 @@ function boxC_Gen()
                 //produces titlecell where titles are to be listed             
                 let titleCell = document.createElement('td');
                 titleCell.setAttribute('id', 'title');
-                titleCell.textContent = p.Title;
+                link = document.createElement('a')
+                link.setAttribute('href', "single-painting.php?paintings=".concat(p.PaintingID));
+                link.textContent = p.Title;
+                titleCell.appendChild(link);
 
                 //produces yearcell where years are to be listed             
                 let yearCell = document.createElement('td');
@@ -476,14 +472,6 @@ function boxC_Gen()
 
                 //display box c 
                 document.querySelector(".box.c section").style.display = "block";
-            });
-
-            //creating event handlers for all thumbnails
-            //additionally generating an updated URL for further passing 
-            document.querySelectorAll(".link").forEach(rows => {
-                rows.addEventListener('click', (e) => {
-                    let paintUrlUpdate = url2.replace("gallery=", "id=").concat(e.target.getAttribute('id'));
-                });
             });
         }
 
