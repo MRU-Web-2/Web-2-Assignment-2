@@ -72,6 +72,7 @@ function boxC_Gen()
 <html>
 
 <head>
+<?php include("header.php"); ?>
     <title>Assignment 2 Galleries Page</title>
     <meta charset=utf-8>
     <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
@@ -86,7 +87,17 @@ function boxC_Gen()
 </head>
 
 <body>
-    <?php include("header.php"); ?>
+<style>
+        body {
+            background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            /* margin: 50px auto;  */
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+   
     <main class="container">
         <div class="box a">
             <?php
