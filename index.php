@@ -21,14 +21,6 @@ if (isset($_SESSION['user'])) {
       box-sizing: border-box;
     }
 
-    body {
-      background-image: url('/images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
-      background-size: cover;
-      background-repeat: no-repeat;
-      margin: 50px auto;
-      text-align: center;
-      width: 800px;
-    }
 
     a {
       position: relative;
@@ -90,6 +82,9 @@ if (isset($_SESSION['user'])) {
 
     .SearchBar input {
       width: 600px;
+      margin-left: 430px;
+    display: inline-block;
+      
     }
 
     h1 {
@@ -102,8 +97,28 @@ if (isset($_SESSION['user'])) {
   </style>
 </head>
 
-<body>
+<body style="background-image: url(./images/payson-wick-vGLXKqCY66Y-unsplash.jpg);
+background-size: cover;
+background-repeat: no-repeat;
+    text-align: center;
+    margin: 10px;
+    padding: 5px 20px;
+    background-color: #cccccc;">
+  
+  <br>
+  <br>
+  <br>
   <h1>Assignment 2</h1><br><br><br>
+  <!-- <style>
+    body {
+      background-image: url('/images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      margin: 50px auto;
+      text-align: center;
+      width: 800px;
+    }
+    </style> -->
   <a href="login.php" id="a" type="button" name="register" value="register" on>Log In</a>
   <a href="#" id="b" type="button" name="register" value="register">Join</a><br><br><br><br>
   <div class="Searchbar">

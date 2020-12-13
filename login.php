@@ -117,6 +117,9 @@ function isLoginDataPresent()
         input[type=email] {
             margin-left: 25px;
         }
+        input[type=password]{
+            margin-left: 0px;
+        }
 
         button {
             background-color: #4CAF50;
@@ -162,15 +165,15 @@ function isLoginDataPresent()
                 <p><?= $msg ?></p>
                 <form method="post" action="login.php">
                     <div class="topnav">
-                        <label for="email"><b>Email</b></label>
+                        <label for="email"><b>Email</b> </label>
 
 
-                        <input type="email" placeholder="Enter Email" name="email">
+                        <input type="email" placeholder="Enter Email" name="email"><br>
 
 
 
                         <label for="pass"><b>Password </b></label>
-                        <input type="password" placeholder="Enter Password" name="pass">
+                        <input type="password" placeholder="Enter Password" name="pass"> <br>
                         <button type="submit" id="button" type=button value="Login">Login</button>
                     </div>
 
