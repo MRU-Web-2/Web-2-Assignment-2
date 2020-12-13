@@ -1,7 +1,9 @@
 <?php
 /* add your PHP code here */
 require_once 'asg2-helpers.inc.php';
+include("header.php");
 
+//function gets galleries data, invokes a sort function and returns data of galleries 
 //https://www.codegrepper.com/code-examples/php/php+sort+json+array
 function getGalleries()
 {
@@ -13,32 +15,33 @@ function getGalleries()
     return $galleriesData;
 }
 
+//function sorts galleries data by gallery name, then returns it
 function sortByName($a, $b)
 {
     return  $a->GalleryName > $b->GalleryName;
 }
 
+//function returns paintings url 
 function getPaintings()
 {
-    $paintingsURL = 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?gallery=';
-
-    return $paintingsURL;
+    return 'https://assignment2-297900.uc.r.appspot.com/api-paintings.php?gallery=';
 }
 
+//function gets artists data and returns it. Sadly it is defunct and doesn't work. 
 function getArtists()
 {
     $artistURL = "https://assignment2-297900.uc.r.appspot.com/api-artists.php";
     $artistData = json_decode(file_get_contents($artistURL));
-
     return $artistData;
 }
 
+//generates details of box A which hosts gallery details 
 function boxA_Gen()
 {
     echo "<section>";
     echo "<label></label>";
     echo "<h2 id='galleryName'></h2>";
-    echo "<label>'Native Name:'</label>";
+    echo "<label>Native Name:</label>";
     echo "<span id='galleryNative'></span>";
     echo "<label>City:</label>";
     echo "<span id='galleryCity'></span>";
@@ -51,6 +54,7 @@ function boxA_Gen()
     echo "</section>";
 }
 
+//generates details of box b which has a list of outputted galleries for the user to choose from 
 function boxB_Gen()
 {
     echo "<section>";
@@ -59,6 +63,7 @@ function boxB_Gen()
     echo "</section>";
 }
 
+//generates details of box c which hosts a list of paintings located within a gallery 
 function boxC_Gen()
 {
     echo "<section>";
@@ -72,10 +77,14 @@ function boxC_Gen()
 <html>
 
 <head>
+<<<<<<< HEAD
     <?php include("header.php"); ?>
+=======
+>>>>>>> 51fc6a7711a5239cf00621da2c21117252172fc4
     <title>Assignment 2 Galleries Page</title>
     <meta charset=utf-8>
     <!-- These 3 references are taken from Lab14a. Might remove and remodel to our own CSS if we have time. -->
+    <!-- Note: These fonts are unique and I can't find them when I want do font-family in css. I say keep em -->
     <link href='http://fonts.googleapis.com/css?family=Merriweather' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css" rel="stylesheet">
@@ -87,17 +96,6 @@ function boxC_Gen()
 </head>
 
 <body>
-<style>
-        body {
-            background-image: url('images/payson-wick-vGLXKqCY66Y-unsplash.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            /* margin: 50px auto;  */
-            text-align: center;
-            width: 100%;
-        }
-    </style>
-   
     <main class="container">
         <div class="box a">
             <?php
@@ -118,9 +116,6 @@ function boxC_Gen()
             ?>
         </div>
     </main>
-    <footer class="ui black inverted segment">
-        <div class="ui container">This is the footer</div>
-    </footer>
     <script type="text/javascript">
         /** 
          * Borrows design elements of Lab 10 test your knowledge 5, though it has been altered 
@@ -201,19 +196,18 @@ function boxC_Gen()
             document.getElementById('map')
         }
 
-        //fetch gallery data from url 
+        //fetch gallery data from PHP side of code 
+        //retrieve data from database, if local storage is filled then retrieve from local storage 
         let galleriesData;
         if (localStorage.hasOwnProperty("galleries")) {
-            galleriesData = Array.from(localStorage.getItem("galleries"));
-            alert("Local storage successful");
-            localStorage.clear();
+            galleriesData = JSON.parse(localStorage.getItem("galleries"));
         } else {
             galleriesData = Array.from(<?php echo json_encode(getGalleries()); ?>);
-            //localStorage.setItem("galleries", JSON.stringify(galleriesData));
-            alert("Grabbing from JSON php");
+            localStorage.setItem("galleries", galleriesData);
+            console.log(galleriesData);
         }
 
-        //pass that data to populateGallery function
+        //loop through GalleriesData, then send each individual element to populate the list 
         galleriesData.forEach(g => {
             populateGallery(g);
         });
@@ -232,8 +226,10 @@ function boxC_Gen()
                 let lat = parseFloat(e.target.getAttribute('latitude'));
                 let lon = parseFloat(e.target.getAttribute('longitude'));
 
-                //Concat from https://www.w3schools.com/jsref/jsref_concat_string.asp
-                //Combines url with id of paintings to generate a specific gallery's list of paintings
+                document.querySelector(".box.a section").style.display = "grid";
+
+
+                //obtain a painting.php url for future operations involving paintings
                 let paintURL = "<?php echo getPaintings(); ?>".concat(e.target.id);
                 //calls several functions to fulfill rest of the functionality
                 //box a filled with gallery details
@@ -274,6 +270,29 @@ function boxC_Gen()
             li.setAttribute('id', galleries.GalleryID);
             uList.appendChild(li);
         }
+
+        /**
+         * Generates and populates the details of galleries listed in Box a 
+         *
+         * @param name
+         * Passes the name of the gallery
+         *
+         * @param native
+         * Passes the local name of the gallery
+         *
+         * @param city
+         * Passes the name of the city the gallery is located in
+         *
+         * @param address
+         * Passes the exact address its located 
+         *
+         * @param country
+         * Passes the name of the country the gallery is located 
+         *
+         * @param home
+         * Passes an updated URL of paintings to 
+         *
+         */
 
         function galDetails(name, native, city, address, country, home) {
 
@@ -320,6 +339,7 @@ function boxC_Gen()
             //distinguishes table body elements from header 
             let tableBody = document.createElement('tbody');
 
+            //appends header details to header, appends header and body to table 
             tHeader.appendChild(imageHeading);
             tHeader.appendChild(artist);
             tHeader.appendChild(title);
@@ -329,51 +349,44 @@ function boxC_Gen()
             table.appendChild(tableBody);
 
             //fetches for paintings from a specific gallery
-
             fetch(paintURL)
                 .then(response => response.json())
                 .then(paintings => {
-                    //grabs array of paintings from updated url2
+                    //grabs array of paintings from paintURL
                     pTableSorter = Array.from(paintings);
 
-                    //Gets artist array to sort names 
-                    aNameSorter =
+                    //calls array to perform a default sort based on year 
+                    yearSort(pTableSorter);
 
-                        //calls array to perform a default sort based on year 
-                        yearSort(pTableSorter, gallery);
-
-                    //events appended to headers to sort based on lastname or title          
+                    //events appended to headers to sort based on lastname or title (Note: Last Name sort does not work)       
                     year.addEventListener('click', (e) => {
-                        yearSort(pTableSorter, gallery);
+                        yearSort(pTableSorter);
                     });
                     title.addEventListener('click', (e) => {
-                        titleSort(pTableSorter, gallery);
+                        titleSort(pTableSorter);
                     });
                     artist.addEventListener('click', (e) => {
-                        lastNameSort(pTableSorter, gallery);
+                        lastNameSort(pTableSorter);
                     });
                 })
                 .catch(error => console.log(error));
         }
 
         /**
-         * Sorts based on an artist's last name when user selects heading "Artist"  
+         * Sorts based on year when user selects heading "Year"  
          *
          * @param pTableSorter   
-         * Passes Array of paintings to sort 
-         *
-         * @param gallery    
-         * Passes details about Gallery for eventual use of populating details of large painting box 
+         * Passes Array of paintings to sort   
          *
          */
 
-        function yearSort(pTableSorter, gallery) {
+        function yearSort(pTableSorter) {
 
             //sorts based on last name 
             pTableSorter.sort((a, b) => {
                 return a.YearOfWork < b.YearOfWork ? -1 : 1;
             });
-            paintingTableCreate(pTableSorter, gallery);
+            paintingTableCreate(pTableSorter);
         }
 
         /**
@@ -382,39 +395,33 @@ function boxC_Gen()
          * @param pTableSorter   
          * Passes Array of paintings to sort  
          *
-         * @param gallery    
-         * Passes details about Gallery for eventual use of populating details of large painting box 
-         *
          */
 
-        function titleSort(pTableSorter, gallery) {
+        function titleSort(pTableSorter) {
 
             //sorts based on title
             pTableSorter.sort((a, b) => {
                 return a.Title < b.Title ? -1 : 1;
             });
-            paintingTableCreate(pTableSorter, gallery);
+            paintingTableCreate(pTableSorter);
 
         }
 
         /**
-         * Sorts based on year when user selects heading "Year"  
+         * Sorts based on an artist's last name when user selects heading "Artist"  
          *
          * @param pTableSorter   
-         * Passes Array of paintings to sort  
-         *
-         * @param gallery    
-         * Passes details about Gallery for eventual use of populating details of large painting box 
-         *
+         * Passes Array of paintings to sort 
+         * 
          */
 
-        function lastNameSort(pTableSorter, gallery) {
+        function lastNameSort(pTableSorter) {
 
             //sorts based on last name 
             pTableSorter.sort((a, b) => {
                 return a.LastName < b.ArtistID ? -1 : 1;
             });
-            paintingTableCreate(pTableSorter, gallery);
+            paintingTableCreate(pTableSorter);
         }
 
         /**
@@ -423,12 +430,9 @@ function boxC_Gen()
          * @param pArraySort   
          * Passes a sorted Array of paintings to populate the table 
          *
-         * @param gallery    
-         * Passes element gallery for event to transfer to largePaintingBox function
-         *
          */
 
-        function paintingTableCreate(pArraySort, gallery) {
+        function paintingTableCreate(pArraySort) {
             let artistData = Array.from(<?php echo json_encode(getArtists()); ?>);
             let imgPath = "./images/paintings/square/";
 
@@ -443,12 +447,10 @@ function boxC_Gen()
             pArraySort.forEach(p => {
                 let row = document.createElement('tr');
                 row.setAttribute('id', 'tableRow');
-
                 //produces cell where painting thumnails are to be located 
                 let thumbnailCell = document.createElement('td');
                 let thumbnail = document.createElement('img');
                 thumbnail.setAttribute('src', imgPath.concat(imgFileNameFix(p.ImageFileName.toString())));
-                thumbnail.setAttribute('class', 'link');
                 thumbnail.setAttribute('id', p.PaintingID);
                 thumbnailCell.appendChild(thumbnail);
 
@@ -458,11 +460,9 @@ function boxC_Gen()
                 artistData.forEach(a => {
                     if (p.ArtistID == a.ArtistID) {
                         if (a.FirstName == null) {
-                            console.log(a.FirstName);
                             artistCell = document.createElement('td');
                             artistCell.textContent = a.LastName;
                         } else {
-                            console.log(a.FirstName);
                             artistCell = document.createElement('td');
                             artistCell.textContent = (a.FirstName + " " + a.LastName);
                         }
@@ -470,15 +470,20 @@ function boxC_Gen()
                 });
 
                 //produces titlecell where titles are to be listed             
+                //attaches website link to single-painting.php onto title  
                 let titleCell = document.createElement('td');
                 titleCell.setAttribute('id', 'title');
-                titleCell.textContent = p.Title;
+                link = document.createElement('a')
+                link.setAttribute('href', "single-painting.php?paintings=".concat(p.PaintingID));
+                link.textContent = p.Title;
+                titleCell.appendChild(link);
 
                 //produces yearcell where years are to be listed             
                 let yearCell = document.createElement('td');
                 yearCell.setAttribute('id', 'year');
                 yearCell.textContent = p.YearOfWork;
 
+                //appends all row details into the row. Then appends row into the table body 
                 row.appendChild(thumbnailCell);
                 row.appendChild(artistCell);
                 row.appendChild(titleCell);
@@ -488,17 +493,22 @@ function boxC_Gen()
                 //display box c 
                 document.querySelector(".box.c section").style.display = "block";
             });
-
-            //creating event handlers for all thumbnails
-            //additionally generating an updated URL for further passing 
-            document.querySelectorAll(".link").forEach(rows => {
-                rows.addEventListener('click', (e) => {
-                    let paintUrlUpdate = url2.replace("gallery=", "id=").concat(e.target.getAttribute('id'));
-                });
-            });
         }
 
+
+        /**
+         * Fixes file name of images with a leading zeroes  
+         *
+         * @param imageFileName
+         * Passes filename of image so that if affected by leading zero error, is fixed 
+         *
+         */
+
         function imgFileNameFix(imageFileName) {
+            //tests if image file name is about 4 or 5 numbers in length, fixes and attaches filetype .jpg
+            //if 4, attaches two zeroes. Returns a fixed filename img 
+            //if 5, attaches one zero. Returns fixed filename img
+            //if not needed to be fixed, return img. 
             if (imageFileName.length == 4) {
                 let fixLink = "00".concat(imageFileName);
                 return fixLink.concat(".jpg");
